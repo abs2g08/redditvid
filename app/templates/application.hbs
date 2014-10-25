@@ -1,3 +1,25 @@
-<h2 id='title'>Welcome to Ember.js</h2>
+<header class="app-bar promote-layer">
+  <div class="app-bar-container">
+    <button class="menu" {{action 'toggleMenu'}}><img src="images/hamburger.svg" alt="Menu"></button>
+    <h1 class="logo">Web <strong>Starter Kit</strong></h1>
+    <section class="app-bar-actions">
+    <!-- Put App Bar Buttons Here -->
+    <!-- e.g <button><i class="icon icon-star"></i></button> -->
+    </section>
+  </div>
+</header>
 
-{{outlet}}
+<nav class="navdrawer-container promote-layer">
+  <h4>Navigation</h4>
+  <ul>
+{{!-- 	<li>{{#link-to 'index'}}  Index {{/link-to}}</li>
+	<li>{{#link-to 'about'}}  About {{/link-to}}</li> --}}
+  <li><a href="#" {{action 'index'}}> Index</a></li>
+  <li><a href="#" {{action 'about'}}> About</a></li>
+  {{!-- <li>{{action 'about'}} About</li>   --}}
+  </ul>
+</nav>
+
+<main>
+	{{liquid-outlet}}
+</main>
