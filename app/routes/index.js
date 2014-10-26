@@ -1,7 +1,15 @@
 import Ember from 'ember';
+import SVGLoader from 'vendor/svgloader';
 
 export default Ember.Route.extend({
+
+  beforeModel: function() {
+    this.loader = new SVGLoader( document.getElementById( 'loader' ), { speedIn : 100 } );
+    this.loader.show();
+  },
+
   model: function() {
+    var _this = this;
     return Ember.$.getJSON('http://www.reddit.com/r/videos.json').then(function(data) {
       return data.data.children.map(function(rawItem, index){
         var item = {};
@@ -12,6 +20,13 @@ export default Ember.Route.extend({
         item.media_embed = rawItem.data.media_embed.content;
         return item;
       });
+    }).fail(function(){
+      _this.loader.hide();
+      debugger;
     });
+  },
+
+  afterModel: function() {
+    this.loader.hide();
   }
 });

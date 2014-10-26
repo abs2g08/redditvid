@@ -59,14 +59,15 @@ SVGLoader.prototype.show = function() {
 }
 
 SVGLoader.prototype.hide = function() {
-	var self = this;
-	classie.removeClass( this.el, 'pageload-loading' );
-	this._animateSVG( 'out', function() { 
-		// reset path
-		self.path.attr( 'd', self.initialPath );
-		classie.removeClass( self.el, 'show' );
-		self.isAnimating = false; 
-	} );
+	var _this = this;
+	setTimeout( function() {
+		classie.removeClass( _this.el, 'pageload-loading' );
+		_this._animateSVG( 'out', function() { 
+			_this.path.attr( 'd', _this.initialPath );
+			classie.removeClass( _this.el, 'show' );
+			self.isAnimating = false; 
+		} );
+	}, 1000);
 }
 
 SVGLoader.prototype._animateSVG = function( dir, callback ) {
