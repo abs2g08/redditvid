@@ -4,7 +4,6 @@ import SVGLoader from 'vendor/svgloader';
 export default Ember.Route.extend({
 
   beforeModel: function() {
-  	debugger;
   	if(!this.modelFor('page')) {
 	    this.loader = new SVGLoader( document.getElementById( 'loader' ), { speedIn : 0, speedOut : 0 } );
 	    this.loader.show();
@@ -12,9 +11,6 @@ export default Ember.Route.extend({
   },
 
   model: function(params) {
-
-  	debugger;
-
     var _this = this;
     return Ember.$.getJSON('http://www.reddit.com/r/videos/comments/'+params.id+'.json').then(function(rawData) {
     	var item = {};
