@@ -4,7 +4,7 @@ import SVGLoader from 'vendor/svgloader';
 export default Ember.Route.extend({
 
   beforeModel: function() {
-    this.loader = new SVGLoader( document.getElementById( 'loader' ), { speedIn : 100 } );
+    this.loader = new SVGLoader( document.getElementById( 'loader' ), { speedIn : 0 } );
     this.loader.show();
   },
 
@@ -21,12 +21,12 @@ export default Ember.Route.extend({
         return item;
       });
     }).fail(function(){
-      _this.loader.hide();
+      _this.loader.hide({ delay: 1000 });
       debugger;
     });
   },
 
   afterModel: function() {
-    this.loader.hide();
+    this.loader.hide({ delay: 1000 });
   }
 });

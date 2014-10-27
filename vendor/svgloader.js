@@ -58,7 +58,14 @@ SVGLoader.prototype.show = function() {
 	classie.add( this.el, 'show' );
 }
 
-SVGLoader.prototype.hide = function() {
+SVGLoader.prototype.hide = function(options) {
+
+	var delay = 0;
+
+	if ('delay' in options) {
+		delay = options.delay;
+	}
+
 	var _this = this;
 	setTimeout( function() {
 		classie.removeClass( _this.el, 'pageload-loading' );
@@ -67,7 +74,7 @@ SVGLoader.prototype.hide = function() {
 			classie.removeClass( _this.el, 'show' );
 			self.isAnimating = false; 
 		} );
-	}, 1000);
+	}, delay);
 }
 
 SVGLoader.prototype._animateSVG = function( dir, callback ) {
@@ -90,7 +97,5 @@ SVGLoader.prototype._animateSVG = function( dir, callback ) {
 
 	nextStep(pos);
 }
-
-// function SVGLoader() { alert('test'); };
 
 export default SVGLoader;
