@@ -6,6 +6,6 @@ export default Ember.ObjectController.extend({
   }.property('costMoney'),
 
   actions: {
-
+  	
   }
 });

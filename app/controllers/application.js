@@ -11,7 +11,6 @@ export default Ember.ObjectController.extend({
   	  	this.transitionToRoute('about');
   	  },  	  
 	  closeMenu: function() {
-
 	  	Ember.$('body').removeClass('open');
 	  	Ember.$('.app-bar').removeClass('open');
 	  	Ember.$('.navdrawer-container').removeClass('open');

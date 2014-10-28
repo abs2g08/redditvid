@@ -3,5 +3,6 @@
 	<div>
 		{{safe-string media_embed}}
 	</div>
-
+	<button {{action "showComments"}}>show comments</button>
+	{{outlet "comments"}}
 </div>
