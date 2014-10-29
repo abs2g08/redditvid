@@ -4,8 +4,10 @@ import SVGLoader from 'vendor/svgloader';
 export default Ember.Route.extend({
 
   beforeModel: function() {
-    this.loader = new SVGLoader( document.getElementById( 'loader' ), { speedIn : 0, speedOut : 500 } );
-    this.loader.show();
+    if(!this.modelFor('index')) {
+      this.loader = new SVGLoader( document.getElementById( 'loader' ), { speedIn : 0, speedOut : 500 } );
+      this.loader.show();
+    }
   },
 
   model: function() {
