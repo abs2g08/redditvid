@@ -3,11 +3,6 @@ import SVGLoader from 'vendor/svgloader';
 
 export default Ember.Route.extend({
 
-  // setupController: function(controller, model) {
-  //   debugger;
-  //   controller.set('model', model);
-  // },
-
   beforeModel: function() {
     if(!this.modelFor('index')) {
       this.loader = new SVGLoader( document.getElementById( 'loader' ), { speedIn : 0, speedOut : 500 } );
