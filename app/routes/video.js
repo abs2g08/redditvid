@@ -1,16 +1,10 @@
 import Ember from 'ember';
 import SVGLoader from 'vendor/svgloader';
+import VideoModel from '../models/video';
 
 export default Ember.Route.extend({
 
-  renderTemplate: function() {
-    this._super(this, arguments);
-  	// this.render('components/comments', {
-   //    outlet: 'comments',
-   //    into: 'page',
-   //  });    
-  },
-
+  modelObj: VideoModel.create(),
   beforeModel: function() {
   	if(!this.modelFor('video')) {
 	    this.loader = new SVGLoader( document.getElementById( 'loader' ), { speedIn : 0, speedOut : 0 } );
@@ -20,19 +14,7 @@ export default Ember.Route.extend({
 
   model: function(params) {
     var _this = this;
-    return Ember.$.getJSON('http://www.reddit.com/r/videos/comments/'+params.id+'.json').then(function(rawData) {
-    	var item = {};
-    	var video_data = rawData[0].data.children[0].data;
-    	item.media_embed = video_data.media_embed.content;
-    	item.title = video_data.title;
-    	item.comments = rawData[1].data.children.map(function(rawComment, index) {
-    		var comment = {};
-    		comment.text = rawComment.data.body;
-    		comment.author = rawComment.data.author;
-    		return comment;
-    	});
-    	return item;
-    }).fail(function() {
+    return this.get('modelObj').fetch({ id: params.id }).fail(function() {
       _this.loader.hide({ delay: 1000 });
     });
   },
@@ -42,16 +24,14 @@ export default Ember.Route.extend({
   },
 
   actions: {
-  	showComments: function() {
-      debugger;
-      if(!this.modelFor('video').comments) {
-        //this.modelFor('video').set()
-      } else {
-        this.render('components/comments', {
-            outlet: 'comments',
-            into: 'video',
-        });
-      }
-  	}
+    showComments: function() {
+      var _this = this;
+      this.modelObj.fetch({ id: this.controller.get('id'), context: this.controller }).then(function() {
+        _this.render('components/comments', {
+              outlet: 'comments',
+              into: 'video',
+          });
+      });
+    }
   }
 });
