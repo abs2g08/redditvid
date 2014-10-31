@@ -32,21 +32,26 @@ export default Ember.Route.extend({
     		return comment;
     	});
     	return item;
-    }).fail(function(){
+    }).fail(function() {
       _this.loader.hide({ delay: 1000 });
     });
   },
 
   afterModel: function() {
-      this.loader.hide({ delay: 1000 });
+    this.loader.hide({ delay: 1000 });
   },
 
   actions: {
   	showComments: function() {
-  		this.render('components/comments', {
-      		outlet: 'comments',
-      		into: 'video',
-    	});
+      debugger;
+      if(!this.modelFor('video').comments) {
+        //this.modelFor('video').set()
+      } else {
+        this.render('components/comments', {
+            outlet: 'comments',
+            into: 'video',
+        });
+      }
   	}
   }
 });

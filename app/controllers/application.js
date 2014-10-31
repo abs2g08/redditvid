@@ -2,9 +2,9 @@ import Ember from 'ember';
 
 export default Ember.ObjectController.extend({
   actions: {
-  	  index: function() {
+  	  videos: function() {
   	  	this.send('closeMenu');
-  	  	this.transitionToRoute('index');
+  	  	this.transitionToRoute('videos');
   	  },
   	  about: function() {
   	  	this.send('closeMenu');
