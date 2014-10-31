@@ -3,6 +3,11 @@ import SVGLoader from 'vendor/svgloader';
 
 export default Ember.Route.extend({
 
+  // setupController: function(controller, model) {
+  //   debugger;
+  //   controller.set('model', model);
+  // },
+
   beforeModel: function() {
     if(!this.modelFor('index')) {
       this.loader = new SVGLoader( document.getElementById( 'loader' ), { speedIn : 0, speedOut : 500 } );
@@ -13,11 +18,12 @@ export default Ember.Route.extend({
   model: function() {
     var _this = this;
     return Ember.$.getJSON('http://www.reddit.com/r/videos.json').then(function(data) {
-      return data.data.children.map(function(rawItem, index){
+      return data.data.children.map(function(rawItem, index) {
         var item = {};
         item.title = rawItem.data.title;
-        item.body = 'test';
-        item.date = 'Tue Sep 02 2014 13:29:52 GMT+0100 (BST)';
+        item.author = rawItem.data.author;
+        item.score = rawItem.data.score;
+        item.created = rawItem.data.created;
         item.id = rawItem.data.id;
         item.media_embed = rawItem.data.media_embed.content;
         return item;

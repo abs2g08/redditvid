@@ -15,7 +15,6 @@ export default Ember.ObjectController.extend({
 	  	Ember.$('.app-bar').removeClass('open');
 	  	Ember.$('.navdrawer-container').removeClass('open');
 	  	Ember.$('.navdrawer-container').addClass('opened');
-
 	  },
 	  toggleMenu: function () {
 	  	Ember.$('body').toggleClass('open');
