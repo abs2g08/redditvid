@@ -15,8 +15,6 @@ export default Ember.Object.extend({
     			return comment;
     		});
 
-    		debugger;
-
 	    	if(options.context) {
 	    		Ember.$.each(item, function(key, value) {
 	    			options.context.set(key, value);

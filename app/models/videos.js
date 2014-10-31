@@ -2,13 +2,6 @@ import Ember from 'ember';
 
 export default Ember.Object.extend({
 	fetch: function(options) {
-		var context;
-		if(!options.context) {
-			context = this;
-		} else {
-			context = options.context;
-		}
-	    var _this = this;
 	    return Ember.$.getJSON('http://www.reddit.com/r/videos.json').then(function(data) {
 	      return data.data.children.map(function(rawItem, index) {
 	        var item = {};
@@ -18,10 +11,17 @@ export default Ember.Object.extend({
 	        item.created_utc = rawItem.data.created_utc;
 	        item.id = rawItem.data.id;
 	        item.media_embed = rawItem.data.media_embed.content;
+
+	        //TO-DO: got to figure out the options.context version of this
+
+	    	if(options.context) {
+	    		Ember.$.each(item, function(key, value) {
+	    			options.context.set(key, value);
+	    		});
+	    	}
+
 	        return item;
 	      });
-	    }).fail(function(){
-	      _this.loader.hide({ delay: 1000 });
 	    });
 	}
 });

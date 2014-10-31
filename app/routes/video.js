@@ -32,7 +32,6 @@ export default Ember.Route.extend({
 
   actions: {
     showComments: function() {
-      debugger;
       var _this = this;
       if(!this.modelFor('video').comments) {
         this.modelObj.fetch({ id: this.controller.get('id'), context: this.controller }).then(function() {
