@@ -30,5 +30,11 @@ export default Ember.Route.extend({
 
   afterModel: function() {
     this.loader.hide({ delay: 1000 });
+  },
+
+  actions: {
+    refreshData: function() {
+      this.refresh();
+    }
   }
 });
