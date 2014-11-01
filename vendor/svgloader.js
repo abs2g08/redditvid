@@ -21,6 +21,7 @@ SVGLoader.prototype.options = {
 	easingIn : mina.linear,
 	speedOut: 1000,
 	easingOut : mina.linear,
+	delay: 0,
 }
 
 SVGLoader.prototype._init = function() {
@@ -60,14 +61,7 @@ SVGLoader.prototype.show = function() {
 	classie.add( this.el, 'show' );
 }
 
-SVGLoader.prototype.hide = function(options) {
-
-	var delay = 0;
-
-	if ('delay' in options) {
-		delay = options.delay;
-	}
-
+SVGLoader.prototype.hide = function() {
 	var _this = this;
 	setTimeout( function() {
 		classie.removeClass( _this.el, 'pageload-loading' );
@@ -76,7 +70,7 @@ SVGLoader.prototype.hide = function(options) {
 			classie.removeClass( _this.el, 'show' );
 			self.isAnimating = false; 
 		} );
-	}, delay);
+	}, _this.options.delay);
 }
 
 SVGLoader.prototype._animateSVG = function( dir, callback ) {

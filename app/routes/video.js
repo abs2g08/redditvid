@@ -28,7 +28,7 @@ export default Ember.Route.extend({
 
   beforeModel: function() {
   	if(!this.modelFor('video')) {
-	    this.loader = new SVGLoader( document.getElementById( 'loader' ), { speedIn : 0, speedOut : 0 } );
+	    this.loader = new SVGLoader( document.getElementById( 'loader' ), { speedIn : 0, speedOut : 0, delay: 500 } );
 	    this.loader.show();
   	}
   },
@@ -36,12 +36,12 @@ export default Ember.Route.extend({
   model: function(params) {
     var _this = this;
     return this.fetch({ id: params.id }).fail(function() {
-      _this.loader.hide({ delay: 1000 });
+      _this.loader.hide();
     });
   },
 
   afterModel: function() {
-    this.loader.hide({ delay: 1000 });
+    this.loader.hide();
   },
 
   renderComments: function() {

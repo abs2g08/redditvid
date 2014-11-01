@@ -5,7 +5,7 @@ export default Ember.Route.extend({
 
   beforeModel: function() {
     if(!this.modelFor('index')) {
-      this.loader = new SVGLoader( document.getElementById( 'loader' ), { speedIn : 0, speedOut : 500 } );
+      this.loader = new SVGLoader( document.getElementById( 'loader' ), { speedIn : 0, speedOut : 500, delay : 1000 } );
       this.loader.show();
     }
   },
@@ -24,12 +24,12 @@ export default Ember.Route.extend({
         return item;
       });
     }).fail(function(){
-      _this.loader.hide({ delay: 1000 });
+      _this.loader.hide();
     });
   },
 
   afterModel: function() {
-    this.loader.hide({ delay: 1000 });
+    this.loader.hide();
   },
 
   actions: {
