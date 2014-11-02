@@ -1,6 +1,4 @@
 import Ember from 'ember';
-// import SVGLoader from 'vendor/svgloader';
-
 import SVGLoader from '../mixins/svgloader';
 
 export default Ember.Route.extend(SVGLoader, {
@@ -36,23 +34,12 @@ export default Ember.Route.extend(SVGLoader, {
       });
   },
 
-  // beforeModel: function() {
-  // 	if(!this.modelFor('video')) {
-	 //    this.loader = new SVGLoader( document.getElementById( 'loader' ), { speedIn : 0, speedOut : 0, delay: 500 } );
-	 //    this.loader.show();
-  // 	}
-  // },
-
   model: function(params) {
     var _this = this;
     return this.fetch({ id: params.id }).fail(function() {
       _this.loader.hide();
     });
   },
-
-  // afterModel: function() {
-  //   this.loader.hide();
-  // },
 
   renderComments: function() {
     this.render('components/comments', {
