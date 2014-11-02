@@ -1,7 +1,17 @@
 import Ember from 'ember';
-import SVGLoader from 'vendor/svgloader';
+// import SVGLoader from 'vendor/svgloader';
 
-export default Ember.Route.extend({
+import SVGLoader from '../mixins/svgloader';
+
+export default Ember.Route.extend(SVGLoader, {
+
+  init: function() {
+    this.loaderOptions = { 
+      speedIn : 0,
+      speedOut : 0,
+      delay : 500
+    };
+  },
 
   fetch: function(options) {
       return Ember.$.getJSON('http://www.reddit.com/r/videos/comments/'+options.id+'.json').then(function(rawData) {
@@ -26,12 +36,12 @@ export default Ember.Route.extend({
       });
   },
 
-  beforeModel: function() {
-  	if(!this.modelFor('video')) {
-	    this.loader = new SVGLoader( document.getElementById( 'loader' ), { speedIn : 0, speedOut : 0, delay: 500 } );
-	    this.loader.show();
-  	}
-  },
+  // beforeModel: function() {
+  // 	if(!this.modelFor('video')) {
+	 //    this.loader = new SVGLoader( document.getElementById( 'loader' ), { speedIn : 0, speedOut : 0, delay: 500 } );
+	 //    this.loader.show();
+  // 	}
+  // },
 
   model: function(params) {
     var _this = this;
@@ -40,9 +50,9 @@ export default Ember.Route.extend({
     });
   },
 
-  afterModel: function() {
-    this.loader.hide();
-  },
+  // afterModel: function() {
+  //   this.loader.hide();
+  // },
 
   renderComments: function() {
     this.render('components/comments', {

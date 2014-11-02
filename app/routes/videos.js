@@ -1,13 +1,22 @@
 import Ember from 'ember';
-import SVGLoader from 'vendor/svgloader';
+// import SVGLoader from 'vendor/svgloader';
+import SVGLoader from '../mixins/svgloader';
 
-export default Ember.Route.extend({
+export default Ember.Route.extend(SVGLoader, {
 
-  beforeModel: function() {
-    if(!this.modelFor('index')) {
-      this.loader = new SVGLoader( document.getElementById( 'loader' ), { speedIn : 0, speedOut : 500, delay : 1000 } );
-      this.loader.show();
-    }
+  // beforeModel: function() {
+  //   if(!this.modelFor('index')) {
+  //     this.loader = new SVGLoader( document.getElementById( 'loader' ), { speedIn : 0, speedOut : 500, delay : 1000 } );
+  //     this.loader.show();
+  //   }
+  // },
+
+  init: function() {
+    this.loaderOptions = { 
+      speedIn : 0,
+      speedOut : 500,
+      delay : 1000
+    };
   },
 
   model: function() {
@@ -28,9 +37,9 @@ export default Ember.Route.extend({
     });
   },
 
-  afterModel: function() {
-    this.loader.hide();
-  },
+  // afterModel: function() {
+  //   this.loader.hide();
+  // },
 
   actions: {
     refreshData: function() {
