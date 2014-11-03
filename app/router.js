@@ -6,7 +6,8 @@ var Router = Ember.Router.extend({
 });
 
 Router.map(function() {
-	this.resource('about');	
+	this.resource('about');
+	this.resource('login');	
 	this.resource('videos', { path: '/' });
 	this.resource('video', { path: '/video/:id' });
 });
