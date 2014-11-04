@@ -7,8 +7,8 @@ module.exports = function(environment) {
     baseURL: '/',
     locationType: 'auto',
     contentSecurityPolicy: {
-      'connect-src': "'self' www.reddit.com",
-    },    
+      'connect-src': "'self' www.reddit.com ssl.reddit.com oauth.reddit.com",
+    },
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build

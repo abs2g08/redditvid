@@ -19,9 +19,19 @@ export default Ember.ObjectController.extend({
 
   post: function(direction) {
   	if(User.isLoggedIn) {
-  	  return Ember.$.post('http://www.reddit.com/api/vote', { dir: direction, id: this.get('id') }, "json").then(function() {
-  	    this.set('dir', direction);
-  	  });
+	  var _this = this;
+	  return $.ajax({
+      	type: "POST",
+	    url: "https://oauth.reddit.com/api/vote",
+      	headers: {
+        	"Authorization": "bearer " + User.access_token,
+      	},
+      	dataType: 'json',
+      	data: { dir: direction, id: this.get('id') },
+      }).then(function(){
+      	 _this.set('dir', direction);
+      });
+
   	} else {
   	  alert('you must login first before you can vote');
   	}

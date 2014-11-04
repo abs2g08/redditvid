@@ -12,29 +12,22 @@ export default Ember.Route.extend(SVGLoader, {
     };
   },
 
-  makeid: function() {
-      var text = "";
-      var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-      for (var i=0; i < 5; i++ ) {
-          text += possible.charAt(Math.floor(Math.random() * possible.length));
-      }
-      return text;
+  makeid: function(len) {
+    var text = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    for (var i=0; i < len; i++ ) {
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+    }
+    return text;
   },
 
-  model: function(params) {
-    var msg = '';
-
-    if(params.state) {
-      msg = 'You are now logged in. This means you can up/down vote Reddit videos!';
-      User.isLoggedIn = true;
-    }
-    
-  	return {
+  authorizationModel: function() {
+    return {
       client_id: 'NjCSqf0hIl2emQ',
-      init_state: this.makeid(),
+      init_state: this.makeid(5),
       response_type: 'code',
-      redirect_uri: 'http://0.0.0.0:4200/login',
       duration: 'temporary',
+      redirect_uri: 'http://0.0.0.0:4200/login',
       scope: ['modposts',
               'identity',
               'edit',
@@ -54,8 +47,32 @@ export default Ember.Route.extend(SVGLoader, {
               'subscribe',
               'vote',
               'wikiedit',
-              'wikiread'],
-        message: msg,
+              'wikiread']
+    }
+  },
+
+  post: function(params) {
+    return $.ajax({
+      type: "POST",
+      url: "https://ssl.reddit.com/api/v1/access_token",
+      headers: {
+        "Authorization": "Basic " + btoa('NjCSqf0hIl2emQ' + ":" + ''),
+      },
+      dataType: 'json',
+      data: { grant_type: 'authorization_code', code: params.code, redirect_uri: 'http://0.0.0.0:4200/login', state: params.state },
+    }).then(function(data){
+      User.access_token = data.access_token;
+    });
+  },
+
+  model: function(params) {
+    debugger;
+    if(params.state && params.code) {
+      return this.post(params).then(function(){
+        User.isLoggedIn = true;
+      });
+    } else {
+      return this.authorizationModel();
     }
   }
 });
