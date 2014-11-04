@@ -1,7 +1,9 @@
 import Ember from 'ember';
 import SVGLoader from '../mixins/svgloader';
+import User from '../models/user';
 
 export default Ember.Route.extend(SVGLoader, {
+
   init: function() {
     this.loaderOptions = { 
       speedIn : 0,
@@ -20,11 +22,13 @@ export default Ember.Route.extend(SVGLoader, {
   },
 
   model: function(params) {
-    debugger;
     var msg = '';
+
     if(params.state) {
       msg = 'You are now logged in. This means you can up/down vote Reddit videos!';
+      User.isLoggedIn = true;
     }
+    
   	return {
       client_id: 'NjCSqf0hIl2emQ',
       init_state: this.makeid(),

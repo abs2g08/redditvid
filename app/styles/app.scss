@@ -411,6 +411,40 @@ main {
   fill: #4285f4;
 }
 
+.video {
+
+  padding-bottom: 10px;
+
+  .top {
+    line-height: 0.9em;
+  }
+
+  .arrow {
+    width: 20px;
+    height: 20px;
+    margin: 0px 10px 0px 0px;
+    border-radius: 50%;
+    display: inline-block;
+    cursor: pointer;
+  }
+
+  .arrow.selected {
+    background-color: orange;
+  }
+
+  .arrow.up {
+    background: url("../images/up-arrow.svg") no-repeat top left;
+    background-size: 20px 20px;
+  }
+
+  .arrow.down {
+    background: url("../images/down-arrow.svg") no-repeat top left;
+    background-size: 20px 20px;
+  }
+}
+
+
+
 .pageload-overlay::after,
 .pageload-overlay::before {
   content: '';
