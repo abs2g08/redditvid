@@ -62,6 +62,8 @@ export default Ember.Route.extend(SVGLoader, {
       data: { grant_type: 'authorization_code', code: params.code, redirect_uri: 'http://0.0.0.0:4200/login', state: params.state },
     }).then(function(data){
       User.access_token = data.access_token;
+    }).fail(function(){
+      alert('error trying to gain access token');
     });
   },
 

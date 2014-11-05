@@ -428,18 +428,22 @@ main {
     cursor: pointer;
   }
 
-  .arrow.selected {
-    background-color: orange;
-  }
-
   .arrow.up {
     background: url("../images/up-arrow.svg") no-repeat top left;
     background-size: 20px 20px;
+
+    &.selected {
+      background-color: orange;
+    }
   }
 
   .arrow.down {
     background: url("../images/down-arrow.svg") no-repeat top left;
     background-size: 20px 20px;
+    
+    &.selected {
+      background-color: orange;
+    }    
   }
 }
 

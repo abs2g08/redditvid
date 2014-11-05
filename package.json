@@ -11,11 +11,11 @@
     "build": "ember build",
     "test": "ember test"
   },
-  "repository": "https://github.com/stefanpenner/ember-cli",
+  "repository": "https://github.com/abs2g08/redditvid",
   "engines": {
     "node": ">= 0.10.0"
   },
-  "author": "",
+  "author": "Adam Smith",
   "license": "MIT",
   "devDependencies": {
     "body-parser": "^1.2.0",

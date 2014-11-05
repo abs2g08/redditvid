@@ -1,0 +1,9 @@
+{
+  "name": "redditvid-server",
+  "description": "backend for Redditvid",
+  "author": "Adam Smith",
+  "dependencies": {
+    "express": ">= 1.2.0"
+  },
+  "engine": "node 0.4.1"
+}

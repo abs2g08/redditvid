@@ -10,19 +10,32 @@ export default Ember.ObjectController.extend({
   }.property('created_utc'),
 
   upClass: function() {
-  	return this.get('dir') == 1 ? "selected" : "";
+  	return this.get('dir') === 1 ? "selected" : "";
   }.property('dir'),
 
   downClass: function() {
-  	return this.get('dir') == 2 ? "selected" : "";
+  	return this.get('dir') === 2 ? "selected" : "";
   }.property('dir'),
 
-  post: function(direction) {
+  canVote: function() {
   	if(User.isLoggedIn) {
+  		if(this.get('dir') === 0) {
+  			return true;
+  		} else {
+  			alert('you cannot vote on the same video twice');	
+  		}
+  	} else {
+  		alert('you must login first before you can vote');
+  	}
+  	return false;
+  },
+
+  post: function(direction) {
+  	if(this.canVote()) {
 	  var _this = this;
 	  return $.ajax({
       	type: "POST",
-	    url: "https://oauth.reddit.com/api/vote",
+	      url: "https://oauth.reddit.com/api/vote",
       	headers: {
         	"Authorization": "bearer " + User.access_token,
       	},
@@ -30,10 +43,9 @@ export default Ember.ObjectController.extend({
       	data: { dir: direction, id: this.get('id') },
       }).then(function(){
       	 _this.set('dir', direction);
+      }).fail(function(){
+      	 alert('error trying to vote');
       });
-
-  	} else {
-  	  alert('you must login first before you can vote');
   	}
   },
 
