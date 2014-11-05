@@ -2,13 +2,12 @@ var express = require("express");
 var app = express();
 
 var path = require('path');
- 
-// host reddit vid app
-// app.get("*", function(req, res) {
-// 	res.sendFile(path.resolve('../dist/index.html'));
-// });
 
 app.use(express.static(__dirname + '/../dist'));
+
+app.get("/test", function(req, res) {
+	res.send('Hello World');
+});
 
 var port = process.env.PORT || 5000;
 
