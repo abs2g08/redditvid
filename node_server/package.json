@@ -3,7 +3,9 @@
   "description": "backend for Redditvid",
   "author": "Adam Smith",
   "dependencies": {
-    "express": ">= 1.2.0"
+    "express": ">= 1.2.0",
+    "http-proxy": "^1.6.1",
+    "proxy-middleware": "^0.7.0"
   },
   "engine": "node 0.4.1"
 }

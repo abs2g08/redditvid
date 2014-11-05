@@ -27,7 +27,7 @@ export default Ember.Route.extend(SVGLoader, {
       init_state: this.makeid(5),
       response_type: 'code',
       duration: 'temporary',
-      redirect_uri: 'http://0.0.0.0:4200/login',
+      redirect_uri: 'http://' + window.location.host,
       scope: ['modposts',
               'identity',
               'edit',
@@ -37,7 +37,7 @@ export default Ember.Route.extend(SVGLoader, {
               'modflair',
               'modlog',
               'modposts', 
-              'modwiki', 
+              'modwiki',
               'mysubreddits',
               'privatemessages',
               'read',
@@ -51,21 +51,28 @@ export default Ember.Route.extend(SVGLoader, {
     }
   },
 
-  post: function(params) {
-    return $.ajax({
-      type: "POST",
-      url: "https://ssl.reddit.com/api/v1/access_token",
-      headers: {
-        "Authorization": "Basic " + btoa('NjCSqf0hIl2emQ' + ":" + ''),
-      },
-      dataType: 'json',
-      data: { grant_type: 'authorization_code', code: params.code, redirect_uri: 'http://0.0.0.0:4200/login', state: params.state },
-    }).then(function(data){
-      User.access_token = data.access_token;
-    }).fail(function(){
-      alert('error trying to gain access token');
-    });
-  },
+  // post: function(params) {
+  //   //var url = 'https://ssl.reddit.com/api/v1/access_token';
+  //   var url = '/ssl-reddit/api/v1/access_token';
+  //   return $.ajax({
+  //     type: "POST",
+  //     url: url,
+  //     headers: {
+  //       "Authorization": "Basic " + btoa('NjCSqf0hIl2emQ' + ":" + ''),
+  //     },
+  //     dataType: 'json',
+  //     data: { 
+  //       grant_type: 'authorization_code', 
+  //       code: params.code,
+  //       redirect_uri: 'http://' + window.location.host + '/#/login',
+  //       state: params.state 
+  //     },
+  //   }).then(function(data){
+  //     User.access_token = data.access_token;
+  //   }).fail(function(){
+  //     alert('error trying to gain access token');
+  //   });
+  // },
 
   model: function(params) {
     debugger;
