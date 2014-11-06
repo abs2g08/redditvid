@@ -411,6 +411,15 @@ main {
   fill: #4285f4;
 }
 
+// Custom CSS Styling
+
+.control-pannel {
+  button {
+    padding: 5px;
+    margin: 10px;
+  }
+}
+
 .video {
   width: 100%;
   padding: 10px 0px 10px 0px;
@@ -422,6 +431,14 @@ main {
     display:inline-block;
     width: 89%;
     min-width: 25px;
+
+    .top {
+      font-weight: bold;
+    }
+
+    .bottom {
+      font-size: 0.9em;
+    }
   }
 
   .arrow-container {
