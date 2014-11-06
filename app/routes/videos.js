@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import SVGLoader from '../mixins/svgloader';
 import User from '../models/user';
+import config from '../config/environment';
 
 export default Ember.Route.extend(SVGLoader, {
 
@@ -13,7 +14,6 @@ export default Ember.Route.extend(SVGLoader, {
   },
 
   getAccessToken: function(params) {
-    //var url = 'https://ssl.reddit.com/api/v1/access_token';
     var _this = this;
     var url = '/ssl-reddit/api/v1/access_token';
 
@@ -21,7 +21,7 @@ export default Ember.Route.extend(SVGLoader, {
       type: "POST",
       url: url,
       headers: {
-        "Authorization": "Basic " + btoa('NjCSqf0hIl2emQ' + ":" + ''),
+        "Authorization": "Basic " + btoa(config.APP.REDDIT.client_id + ":" + ''),
       },
       dataType: 'json',
       data: { 
@@ -42,7 +42,6 @@ export default Ember.Route.extend(SVGLoader, {
   getVideos: function() {
     var _this = this;
     var url = 'http://www.reddit.com/r/videos.json';
-    // var url = '/reddit-cors-proxy/r/videos.json';
 
     return Ember.$.getJSON(url).then(function(data) {
       return data.data.children.map(function(rawItem, index) {

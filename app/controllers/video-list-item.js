@@ -33,6 +33,7 @@ export default Ember.ObjectController.extend({
   post: function(direction) {
   	if(this.canVote()) {
 	  var _this = this;
+    
 	  return $.ajax({
       	type: "POST",
 	      url: "/oath-reddit/api/vote",

@@ -22,7 +22,7 @@ module.exports = function(environment) {
       // when it is created
 
       REDDIT: {
-        CLIENT_ID: 'NjCSqf0hIl2emQ',
+        client_id: 'NjCSqf0hIl2emQ',
       }
     }
   };
