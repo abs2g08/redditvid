@@ -2,11 +2,17 @@
 	<button {{action "refreshData"}}>refresh</button>
 	{{#each itemController="video-list-item"}}
 		<div class="video">
-			<div class="top">
-				<span {{bind-attr class=":arrow :up upClass"}} {{action "voteUp" on="click"}}></span><span class="score">{{score}}</span><span class="vid_link">{{#linkTo 'video' this}} {{title}} {{/linkTo}}</span>
+			<div class="arrow-container">
+				<div {{bind-attr class=":arrow :up upClass"}} {{action "voteUp" on="click"}}></div>
+				<div {{bind-attr class=":arrow :down downClass"}} {{action "voteDown" on="click"}}></div>
 			</div>
-			<div class="bottom">
-				<span class="arrow down {{bind-attr selected=downClass}}" {{action "voteDown" on="click"}}></span><span class="author">Posted by <i>{{author}} {{postedAgo}}</i></span>
+			<div class="text-container">
+				<div class="top">
+					<span class="score">{{score}}</span><span class="vid_link">{{#linkTo 'video' this}} {{title}} {{/linkTo}}</span>
+				</div>
+				<div class="bottom">
+					<span class="author">Posted by <i>{{author}} {{postedAgo}}</i></span>
+				</div>
 			</div>
 		</div>
 	{{/each}}

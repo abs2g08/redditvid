@@ -226,7 +226,7 @@ main {
 main {
   margin: 0 auto;
   /* Height of the header */
-  padding: 60px 16px 16px 16px;
+  padding: 60px 0px 16px 0px;
   min-height: 100%;
 }
 
@@ -412,31 +412,37 @@ main {
 }
 
 .video {
-
-  padding-bottom: 10px;
-
-  .top {
-    line-height: 0.9em;
+  width: 100%;
+  padding: 10px 0px 10px 0px;
+  &:nth-child(even) {
+      background-color: rgb(231, 231, 231);
   }
 
-  .bottom {
-    .author {
-      font-size: 0.9em;
-    }
+  .text-container {
+    display:inline-block;
+    width: 89%;
+    min-width: 25px;
+  }
+
+  .arrow-container {
+    display:block;
+    float:left;
+    width: 10%;
+
   }
 
   .arrow {
     width: 20px;
     height: 20px;
     border-radius: 50%;
-    display: inline-block;
     cursor: pointer;
+    margin: 0 auto;
+    margin-top: 4px;
   }
 
   .arrow.up {
     background: url("../images/up-arrow.svg") no-repeat top left;
     background-size: 20px 20px;
-    margin: 0px 10px 5px 0px;
     &.selected {
       background-color: orange;
     }
@@ -445,7 +451,6 @@ main {
   .arrow.down {
     background: url("../images/down-arrow.svg") no-repeat top left;
     background-size: 20px 20px;
-    margin: 5px 10px 0px 0px;
     &.selected {
       background-color: orange;
     }
