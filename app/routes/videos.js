@@ -12,9 +12,11 @@ export default Ember.Route.extend(SVGLoader, {
     };
   },
 
-  post: function(params) {
+  getAccessToken: function(params) {
     //var url = 'https://ssl.reddit.com/api/v1/access_token';
+    var _this = this;
     var url = '/ssl-reddit/api/v1/access_token';
+
     return $.ajax({
       type: "POST",
       url: url,
@@ -30,21 +32,17 @@ export default Ember.Route.extend(SVGLoader, {
       },
     }).then(function(data){
       User.access_token = data.access_token;
+      User.isLoggedIn = true;
     }).fail(function(){
       alert('error trying to gain access token');
+      _this.loader.hide();
     });
   },
 
-  model: function(params) {
+  getVideos: function() {
     var _this = this;
     var url = 'http://www.reddit.com/r/videos.json';
     // var url = '/reddit-cors-proxy/r/videos.json';
-
-    if(params.state && params.code) {
-      this.post(params).then(function() {
-        User.isLoggedIn = true;
-      });
-    }
 
     return Ember.$.getJSON(url).then(function(data) {
       return data.data.children.map(function(rawItem, index) {
@@ -57,9 +55,20 @@ export default Ember.Route.extend(SVGLoader, {
         item.media_embed = rawItem.data.media_embed.content;
         return item;
       });
-    }).fail(function(){
+    }).fail(function() {
       _this.loader.hide();
-    });
+    });    
+  },
+
+  model: function(params) {
+    var _this = this;
+    if(params.state && params.code) {
+      return this.getAccessToken(params).then(function() {
+        return _this.getVideos();
+      });
+    } else {
+      return _this.getVideos();
+    }
   },
 
   actions: {

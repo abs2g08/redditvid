@@ -440,10 +440,10 @@ main {
   .arrow.down {
     background: url("../images/down-arrow.svg") no-repeat top left;
     background-size: 20px 20px;
-    
+
     &.selected {
       background-color: orange;
-    }    
+    }
   }
 }
 

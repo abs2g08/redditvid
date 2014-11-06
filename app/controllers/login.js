@@ -1,12 +1,6 @@
 import Ember from 'ember';
 
 export default Ember.ObjectController.extend({
-  // queryParams: {
-  //   state: "state",
-  //   code: "code"
-  // },
-  // state: null,
-  // code: null,
   actions: {
   	login: function() {
       var _this = this;

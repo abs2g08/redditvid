@@ -9,14 +9,12 @@ var path = require('path');
 app.use(express.static(__dirname + '/../dist'));
 
 app.get('/test', function(req, res) {
-	res.send('Hello World');
+	res.send('Hello World, this is a test route');
 });
 
-//app.use('/reddit', proxy({ target: 'http://reddit.com'} ).web );
-
 app.use('/reddit-cors-proxy', proxy(url.parse('http://reddit.com')));
-
 app.use('/ssl-reddit', proxy(url.parse('https://ssl.reddit.com')));
+app.use('/oath-reddit', proxy(url.parse('https://oauth.reddit.com')));
 
 var port = process.env.PORT || 5000;
 

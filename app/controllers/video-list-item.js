@@ -6,7 +6,7 @@ export default Ember.ObjectController.extend({
 
   postedAgo: function() {
   	var createdDate = moment.unix(this.get('created_utc'));
-	return createdDate.fromNow();
+	  return createdDate.fromNow();
   }.property('created_utc'),
 
   upClass: function() {
@@ -35,7 +35,7 @@ export default Ember.ObjectController.extend({
 	  var _this = this;
 	  return $.ajax({
       	type: "POST",
-	      url: "https://oauth.reddit.com/api/vote",
+	      url: "/oath-reddit/api/vote",
       	headers: {
         	"Authorization": "bearer " + User.access_token,
       	},
@@ -54,7 +54,7 @@ export default Ember.ObjectController.extend({
   	  this.post(1);
   	},
   	voteDown: function() {
-	  this.post(-1);
+	    this.post(-1);
   	}
   }
 });
