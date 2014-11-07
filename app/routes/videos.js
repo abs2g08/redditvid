@@ -39,6 +39,10 @@ export default Ember.Route.extend(SVGLoader, {
     });
   },
 
+  getUserInfo: function() {
+
+  },
+
   getVideos: function() {
     var _this = this;
     var url = 'http://www.reddit.com/r/videos.json';
