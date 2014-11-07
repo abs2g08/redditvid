@@ -40,7 +40,12 @@ export default Ember.Route.extend(SVGLoader, {
   },
 
   getUserInfo: function() {
-
+    return $.ajax({
+      type: "GET",
+      url: 'http://www.reddit.com/api/me.json',
+    }).then(function(data) {
+      debugger;
+    });
   },
 
   getVideos: function() {
