@@ -52,11 +52,9 @@ export default Ember.Route.extend(SVGLoader, {
   },
 
   model: function(params) {
-    debugger;
-    if(params.state && params.code) {
-      return this.post(params);
-    } else {
-      return this.authorizationModel();
+    if(User.isLoggedIn) {
+      return User;
     }
+    return this.authorizationModel();
   }
 });

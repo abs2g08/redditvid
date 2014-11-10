@@ -41,7 +41,10 @@ export default Ember.ObjectController.extend({
         	"Authorization": "bearer " + User.access_token,
       	},
       	dataType: 'json',
-      	data: { dir: direction, id: this.get('id') },
+      	data: { 
+          dir: direction,
+          id: this.get('id') 
+        },
       }).then(function(data){
       	 _this.set('dir', direction);
       }).fail(function(data) {

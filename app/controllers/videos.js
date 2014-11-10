@@ -8,6 +8,10 @@ export default Ember.ArrayController.extend({
     state: "state",
     code: "code"
   },
+  User: null,
+  getUser: function() {
+  	return this.get('User');
+  }.property('User'),
   state: null,
   code: null,
   itemController: 'video-list-item',

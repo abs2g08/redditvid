@@ -415,6 +415,11 @@ main {
 
 .control-pannel {
   overflow: auto;
+
+  .name {
+    display: inline-block;
+  }
+
   .button-container {
     float:right;
     // height: 55px;

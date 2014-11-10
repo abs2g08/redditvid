@@ -36,8 +36,7 @@ export default Ember.Route.extend(SVGLoader, {
       },
     }).then(function(data){
       User.access_token = data.access_token;
-      User.isLoggedIn = true;
-      _this.clearAuthUrl();
+      return _this.getUserInfo()
     }).fail(function(){
       alert('error trying to gain access token');
       _this.loader.hide();
@@ -45,9 +44,22 @@ export default Ember.Route.extend(SVGLoader, {
   },
 
   getUserInfo: function() {
+    var _this = this;
     return $.ajax({
       type: "GET",
-      url: 'http://www.reddit.com/api/me.json',
+      headers: {
+        "Authorization": "bearer " + User.access_token,
+      },
+      dataType: 'json',
+      url: '/oath-reddit/api/v1/me',
+    }).then(function(data) {
+      debugger;
+      User.name = data.name;
+      User.over_18 = data.over_18;
+      User.isLoggedIn = true;
+
+      _this.controllerFor('videos').set('User', User);
+      _this.clearAuthUrl();
     });
   },
 
