@@ -13,6 +13,10 @@ export default Ember.Route.extend(SVGLoader, {
     };
   },
 
+  clearAuthUrl: function() {
+      window.history.replaceState( {} , '', '/' );
+  },
+
   getAccessToken: function(params) {
     var _this = this;
     var url = '/ssl-reddit/api/v1/access_token';
@@ -33,6 +37,7 @@ export default Ember.Route.extend(SVGLoader, {
     }).then(function(data){
       User.access_token = data.access_token;
       User.isLoggedIn = true;
+      _this.clearAuthUrl();
     }).fail(function(){
       alert('error trying to gain access token');
       _this.loader.hide();
@@ -43,8 +48,6 @@ export default Ember.Route.extend(SVGLoader, {
     return $.ajax({
       type: "GET",
       url: 'http://www.reddit.com/api/me.json',
-    }).then(function(data) {
-      debugger;
     });
   },
 
@@ -70,7 +73,7 @@ export default Ember.Route.extend(SVGLoader, {
 
   model: function(params) {
     var _this = this;
-    if(params.state && params.code) {
+    if(params.state && params.code && !User.isLoggedIn) {
       return this.getAccessToken(params).then(function() {
         return _this.getVideos();
       });

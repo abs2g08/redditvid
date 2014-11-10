@@ -42,9 +42,13 @@ export default Ember.ObjectController.extend({
       	},
       	dataType: 'json',
       	data: { dir: direction, id: this.get('id') },
-      }).then(function(){
+      }).then(function(data){
       	 _this.set('dir', direction);
-      }).fail(function(){
+      }).fail(function(data) {
+         if(data.statusText === "Unauthorized") {
+          User.isLoggedIn = false;
+            alert('your session has expired'); 
+         }
       	 alert('error trying to vote');
       });
   	}

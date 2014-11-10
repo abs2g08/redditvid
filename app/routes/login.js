@@ -51,35 +51,10 @@ export default Ember.Route.extend(SVGLoader, {
     }
   },
 
-  // post: function(params) {
-  //   //var url = 'https://ssl.reddit.com/api/v1/access_token';
-  //   var url = '/ssl-reddit/api/v1/access_token';
-  //   return $.ajax({
-  //     type: "POST",
-  //     url: url,
-  //     headers: {
-  //       "Authorization": "Basic " + btoa('NjCSqf0hIl2emQ' + ":" + ''),
-  //     },
-  //     dataType: 'json',
-  //     data: { 
-  //       grant_type: 'authorization_code', 
-  //       code: params.code,
-  //       redirect_uri: 'http://' + window.location.host + '/#/login',
-  //       state: params.state 
-  //     },
-  //   }).then(function(data){
-  //     User.access_token = data.access_token;
-  //   }).fail(function(){
-  //     alert('error trying to gain access token');
-  //   });
-  // },
-
   model: function(params) {
     debugger;
     if(params.state && params.code) {
-      return this.post(params).then(function(){
-        User.isLoggedIn = true;
-      });
+      return this.post(params);
     } else {
       return this.authorizationModel();
     }
