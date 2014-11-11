@@ -53,13 +53,16 @@ export default Ember.Route.extend(SVGLoader, {
       dataType: 'json',
       url: '/oath-reddit/api/v1/me',
     }).then(function(data) {
-      debugger;
+
       User.name = data.name;
       User.over_18 = data.over_18;
       User.isLoggedIn = true;
 
-      _this.controllerFor('videos').set('User', User);
+      _this.controllerFor('videos').set('user', User);
       _this.clearAuthUrl();
+
+    }).fail(function() {
+      alert('error getting user details');
     });
   },
 

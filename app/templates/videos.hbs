@@ -1,11 +1,15 @@
 <div>
 	<div class="control-pannel">
 		<div class="button-container">
-			{{#if getUser}}
+			{{#if user}}
 				<div class="name">
-					You are logged in as:<b>{{User.name}}</b>
+					You are logged in as: <b>{{user.name}}</b>
 				</div>
-			{{/if}}		
+			{{else}}
+				<div class="name">
+					You are <b>not</b> logged in
+				</div>
+			{{/if}}
 			<button {{action "refreshData"}}>refresh</button>
 		</div>
 	</div>
