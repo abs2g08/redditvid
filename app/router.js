@@ -8,7 +8,7 @@ var Router = Ember.Router.extend({
 Router.map(function() {
 	this.resource('about');
 	this.resource('login');	
-	this.resource('videos', { path: '/', queryParams: ['state', 'code'] });
+	this.resource('videos', { path: '/'}); //, queryParams: ['state', 'code'] }
 	this.resource('video', { path: '/video/:id' });
 });
 

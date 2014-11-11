@@ -12,6 +12,7 @@ export default Ember.Route.extend(SVGLoader, {
   },
 
   fetch: function(options) {
+    this.showMiniLoader();
     return Ember.$.getJSON('http://www.reddit.com/r/videos/comments/'+options.id+'.json').then(function(rawData) {
       var item = {};
       var video_data = rawData[0].data.children[0].data;
@@ -57,6 +58,7 @@ export default Ember.Route.extend(SVGLoader, {
           id: this.controller.get('id'),
           context: this.controller 
         }).then(function() {
+          _this.hideMiniLoader();
           _this.renderComments();
         });
       } else {

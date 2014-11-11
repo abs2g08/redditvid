@@ -49,22 +49,40 @@ SVGLoader.prototype._init = function() {
 	}
 }
 
-SVGLoader.prototype.show = function() {
+SVGLoader.prototype.show = function(options) {
 	if( this.isAnimating ) return false;
 	this.isAnimating = true;
+
+	if(options) {
+		if(options.miniLoader) {
+			if(options.miniLoader === true) {
+				classie.addClass( this.el, 'pageload-loading' );
+				return;	
+			}
+		}
+	}
+
 	// animate svg
 	var self = this,
-		onEndAnimation = function() {
-			classie.addClass( self.el, 'pageload-loading' );
-		};
+	onEndAnimation = function() {
+		classie.addClass( self.el, 'pageload-loading' );
+	};
+
 	this._animateSVG( 'in', onEndAnimation );
 	classie.add( this.el, 'show' );
 }
 
-SVGLoader.prototype.hide = function() {
+SVGLoader.prototype.hide = function(options) {
 	var _this = this;
 	setTimeout( function() {
 		classie.removeClass( _this.el, 'pageload-loading' );
+		if(options) {
+			if(options.miniLoader) {
+				if(options.miniLoader === true) {
+					return;	
+				}
+			}
+		}		
 		_this._animateSVG( 'out', function() { 
 			_this.path.attr( 'd', _this.initialPath );
 			classie.removeClass( _this.el, 'show' );
