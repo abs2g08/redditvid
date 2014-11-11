@@ -5,15 +5,15 @@ var app = express();
 
 var path = require('path');
 
-app.use(express.static(__dirname + '/../dist'));
-
-app.get('/test', function(req, res) {
-	res.send('Hello World, this is a test route');
-});
-
 app.use('/reddit-cors-proxy', proxy(url.parse('http://reddit.com')));
 app.use('/ssl-reddit', proxy(url.parse('https://ssl.reddit.com')));
 app.use('/oath-reddit', proxy(url.parse('https://oauth.reddit.com')));
+
+app.use(express.static(__dirname + '/../dist'));
+
+app.get('*', function(req, res) {
+    res.sendFile(path.resolve(__dirname + '/../dist/index.html'));
+});
 
 var port = process.env.PORT || 5000;
 

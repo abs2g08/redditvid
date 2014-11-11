@@ -45,6 +45,7 @@ export default Ember.Route.extend(SVGLoader, {
 
   getUserInfo: function() {
     var _this = this;
+    
     return $.ajax({
       type: "GET",
       headers: {

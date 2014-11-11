@@ -6,6 +6,7 @@ module.exports = function(environment) {
     environment: environment,
     baseURL: '/',
     locationType: 'auto',
+    // location: 'history',
     // locationType: 'hash',
     contentSecurityPolicy: {
       'connect-src': "'self' www.reddit.com ssl.reddit.com oauth.reddit.com",
