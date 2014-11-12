@@ -56,7 +56,7 @@ export default Ember.Route.extend(SVGLoader, {
       },
     }).then(function() {
       alert('your comment has been posted');
-      _this.set('text', '');
+      _this.controller.set('text', '');
     }).fail(function(data) {
       if(data.statusText === "Unauthorized") {
         User.isLoggedIn = false;
@@ -65,6 +65,18 @@ export default Ember.Route.extend(SVGLoader, {
     }).always(function() {
       _this.hideMiniLoader();
     });
+  },
+
+  canPostComment: function() {
+    if(User.isLoggedIn) {
+      if(this.modelFor('video').text !== '') {
+        return true;
+      } else {
+        alert('you must enter some text before you post');
+      }
+    } else {
+      alert('you must be logged in to comment');
+    }
   },
 
   model: function(params) {
@@ -97,15 +109,9 @@ export default Ember.Route.extend(SVGLoader, {
       }
     },
     postComment: function() {
-      if(User.isLoggedIn) {
-        if(this.modelFor('video').text !== '') {
-          this.showMiniLoader();
-          this.post();
-        } else {
-          alert('you must enter some text before you post');
-        }
-      } else {
-        alert('you must be logged in to comment');
+      if(this.canPostComment()) {
+        this.showMiniLoader();
+        this.post();
       }
     }
   }
