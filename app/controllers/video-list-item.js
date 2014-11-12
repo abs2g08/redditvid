@@ -51,8 +51,9 @@ export default Ember.ObjectController.extend({
          if(data.statusText === "Unauthorized") {
           User.isLoggedIn = false;
             alert('your session has expired'); 
+         } else {
+            alert('error trying to vote');
          }
-      	 alert('error trying to vote');
       });
   	}
   },

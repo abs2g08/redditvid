@@ -3,6 +3,10 @@
 	<div>
 		{{safe-string media_embed}}
 	</div>
-	<button {{action "showComments"}}>show comments</button>
+	{{textarea value=text cols="80" rows="6"}}
+	<div class="commnet-bar">
+		<button {{action "showComments"}}>show comments</button>
+		<button {{action "postComment"}}>post comment</button>	
+	</div>
 	{{outlet "comments"}}
 </div>

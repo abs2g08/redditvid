@@ -34,7 +34,7 @@ export default Ember.Route.extend(SVGLoader, {
         redirect_uri: 'http://' + window.location.host,
         state: params.state 
       },
-    }).then(function(data){
+    }).then(function(data) {
       User.access_token = data.access_token;
       return _this.getUserInfo();
     }).fail(function(){
@@ -58,7 +58,8 @@ export default Ember.Route.extend(SVGLoader, {
       User.name = data.name;
       User.over_18 = data.over_18;
       User.isLoggedIn = true;
-
+      User.comment_karma = data.comment_karma;
+      
       _this.controllerFor('videos').set('user', User);
       _this.clearAuthUrl();
 

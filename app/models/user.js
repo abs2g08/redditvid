@@ -6,4 +6,5 @@ export default Ember.Object.create({
 	name: null,
 	gold_creddits: null,
 	over_18: null,
+	comment_karma: null,
 });

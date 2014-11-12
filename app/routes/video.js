@@ -1,7 +1,9 @@
 import Ember from 'ember';
 import SVGLoader from '../mixins/svgloader';
+import User from '../models/user';
 
 export default Ember.Route.extend(SVGLoader, {
+  text: null,
 
   init: function() {
     this.loaderOptions = { 
@@ -13,10 +15,11 @@ export default Ember.Route.extend(SVGLoader, {
 
   fetch: function(options) {
     this.showMiniLoader();
-    return Ember.$.getJSON('http://www.reddit.com/r/videos/comments/'+options.id+'.json').then(function(rawData) {
+    return Ember.$.getJSON('http://www.reddit.com/r/videos/comments/' + options.id + '.json').then(function(rawData) {
       var item = {};
       var video_data = rawData[0].data.children[0].data;
 
+      item.id = options.id;
       item.media_embed = video_data.media_embed.content;
       item.title = video_data.title;
       item.comments = rawData[1].data.children.map(function(rawComment) {
@@ -33,6 +36,34 @@ export default Ember.Route.extend(SVGLoader, {
       }
 
       return item;
+    });
+  },
+
+  post: function() {
+    var _this = this;
+    return Ember.$.ajax({
+      type: "POST",
+      url: "/oath-reddit/api/comment",
+      headers: {
+        "Authorization": "bearer " + User.access_token,
+      },
+      dataType: 'json',
+      data: { 
+        api_type: "json",
+        //see http://www.reddit.com/dev/api#fullnames
+        thing_id: 't3_' + this.controller.get('id'),
+        text: this.controller.get('text')
+      },
+    }).then(function() {
+      alert('your comment has been posted');
+      _this.set('text', '');
+    }).fail(function(data) {
+      if(data.statusText === "Unauthorized") {
+        User.isLoggedIn = false;
+        alert('your session has expired'); 
+      }
+    }).always(function() {
+      _this.hideMiniLoader();
     });
   },
 
@@ -63,6 +94,18 @@ export default Ember.Route.extend(SVGLoader, {
         });
       } else {
         _this.renderComments();
+      }
+    },
+    postComment: function() {
+      if(User.isLoggedIn) {
+        if(this.modelFor('video').text !== '') {
+          this.showMiniLoader();
+          this.post();
+        } else {
+          alert('you must enter some text before you post');
+        }
+      } else {
+        alert('you must be logged in to comment');
       }
     }
   }
