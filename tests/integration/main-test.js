@@ -12,9 +12,18 @@ module('Main Integration Test', {
 	}
 });
 
-test("Videos are shown on load", function() {
+test("Video list is shown on load", function() {
 	visit("/");
 	andThen(function() {
 		ok(find('.video').length > 0, "Passed!");
 	});
 });
+
+// test("Test each video", function() {
+// 	Ember.$.each(find('.video'), function() {
+// 		visit("/video/" + $(this).data('id'));
+// 		andThen(function() {
+// 			ok(true, "Passed!");
+// 		});
+// 	});
+// });
