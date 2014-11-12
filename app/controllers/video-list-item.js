@@ -5,7 +5,7 @@ export default Ember.ObjectController.extend({
   dir: 0,
 
   postedAgo: function() {
-  	var createdDate = Ember.moment.unix(this.get('created_utc'));
+  	var createdDate = moment.unix(this.get('created_utc'));
 	  return createdDate.fromNow();
   }.property('created_utc'),
 
