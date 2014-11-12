@@ -19,7 +19,7 @@ export default Ember.Route.extend(SVGLoader, {
 
       item.media_embed = video_data.media_embed.content;
       item.title = video_data.title;
-      item.comments = rawData[1].data.children.map(function(rawComment, index) {
+      item.comments = rawData[1].data.children.map(function(rawComment) {
         var comment = {};
         comment.text = rawComment.data.body;
         comment.author = rawComment.data.author;

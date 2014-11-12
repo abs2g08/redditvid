@@ -48,10 +48,10 @@ export default Ember.Route.extend(SVGLoader, {
               'vote',
               'wikiedit',
               'wikiread']
-    }
+    };
   },
 
-  model: function(params) {
+  model: function() {
     if(User.isLoggedIn) {
       return User;
     }

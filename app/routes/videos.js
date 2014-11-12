@@ -21,7 +21,7 @@ export default Ember.Route.extend(SVGLoader, {
     var _this = this;
     var url = '/ssl-reddit/api/v1/access_token';
 
-    return $.ajax({
+    return Ember.$.ajax({
       type: "POST",
       url: url,
       headers: {
@@ -36,7 +36,7 @@ export default Ember.Route.extend(SVGLoader, {
       },
     }).then(function(data){
       User.access_token = data.access_token;
-      return _this.getUserInfo()
+      return _this.getUserInfo();
     }).fail(function(){
       alert('error trying to gain access token');
       _this.loader.hide();
@@ -46,7 +46,7 @@ export default Ember.Route.extend(SVGLoader, {
   getUserInfo: function() {
     var _this = this;
     
-    return $.ajax({
+    return Ember.$.ajax({
       type: "GET",
       headers: {
         "Authorization": "bearer " + User.access_token,
@@ -72,7 +72,7 @@ export default Ember.Route.extend(SVGLoader, {
     var url = 'http://www.reddit.com/r/videos.json';
 
     return Ember.$.getJSON(url).then(function(data) {
-      return data.data.children.map(function(rawItem, index) {
+      return data.data.children.map(function(rawItem) {
         var item = {};
         item.title = rawItem.data.title;
         item.author = rawItem.data.author;

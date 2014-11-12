@@ -5,7 +5,7 @@ export default Ember.ObjectController.extend({
   dir: 0,
 
   postedAgo: function() {
-  	var createdDate = moment.unix(this.get('created_utc'));
+  	var createdDate = Ember.moment.unix(this.get('created_utc'));
 	  return createdDate.fromNow();
   }.property('created_utc'),
 
@@ -34,7 +34,7 @@ export default Ember.ObjectController.extend({
   	if(this.canVote()) {
 	  var _this = this;
     
-	  return $.ajax({
+	  return Ember.$.ajax({
       	type: "POST",
 	      url: "/oath-reddit/api/vote",
       	headers: {
@@ -45,7 +45,7 @@ export default Ember.ObjectController.extend({
           dir: direction,
           id: this.get('id') 
         },
-      }).then(function(data){
+      }).then(function(){
       	 _this.set('dir', direction);
       }).fail(function(data) {
          if(data.statusText === "Unauthorized") {

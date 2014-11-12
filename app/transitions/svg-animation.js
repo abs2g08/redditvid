@@ -1,7 +1,7 @@
 import SVGLoader from 'vendor/svgloader';
-import { stop, Promise, animate } from "vendor/liquid-fire";
+import { stop, animate } from "vendor/liquid-fire";
 
-export default function(oldView, insertNewView, opts) {
+export default function(oldView, insertNewView) {
 
   var loader = new SVGLoader( document.getElementById( 'loader' ), { speedIn : 250 } );
   loader.show();
@@ -13,4 +13,4 @@ export default function(oldView, insertNewView, opts) {
       loader.hide();
       return animate(newView, {opacity: [1, 0]}, {duration:10});
   });
-};
+}
