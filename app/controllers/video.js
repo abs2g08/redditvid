@@ -1,8 +1,12 @@
 import Ember from 'ember';
 
 export default Ember.ObjectController.extend({
-  getComments: function() {
-  	var createdDate = Ember.moment.unix(this.get('created_utc'));
-	return createdDate.fromNow();
-  }.property('comments'),
+ 	showingComments: false,
+	commentsBtnText: function() {
+		if(this.get('showingComments')) {
+			return 'refresh comments';
+		} else {
+			return 'show comments';
+		}
+	}.property('showingComments')
 });

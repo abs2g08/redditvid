@@ -1,10 +1,12 @@
 <div class="login">
-	<button {{action "login"}}>login</button>
-	<div>
+	<div class="text">
 	{{#if isLoggedIn}}
-		<span><b>Your Name:</b> {{name}} </span><span><b>Over 18:</b> {{over_18}} </span>
+		<div><b>Your Name:</b> {{name}} </span><span><b>Over 18:</b> {{over_18}} </div>
+		<div><span class="warn">Warning:</span> refreshing the page will log you out.</div>
 	{{else}}
-		<span>you are <b>not</b> logged in, please select login.</span>
+		<div>You are <b>not</b> logged in, please select login to continue.</div>
+		<div><span class="warn">Warning:</span> you will be temporarily redirected to reddits login page.</div>
 	{{/if}}
 	</div>
+	<button {{action "login"}}>login</button>
 </div>

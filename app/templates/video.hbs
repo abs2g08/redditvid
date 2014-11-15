@@ -5,7 +5,7 @@
 	</div>
 	{{textarea value=text cols="120" rows="6"}}
 	<div class="commnet-bar">
-		<button {{action "showComments"}}>show comments</button>
+		<button {{action "showComments"}}>{{commentsBtnText}}</button>
 		<button {{action "postComment"}}>post comment</button>	
 	</div>
 	{{outlet "comments"}}

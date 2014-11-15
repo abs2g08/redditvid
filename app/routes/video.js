@@ -95,18 +95,15 @@ export default Ember.Route.extend(SVGLoader, {
 
   actions: {
     showComments: function() {
+      this.controller.set('showingComments', true);
       var _this = this;
-      if(!this.modelFor('video').comments) {
-        this.fetch({
-          id: this.controller.get('id'),
-          context: this.controller 
-        }).then(function() {
-          _this.hideMiniLoader();
-          _this.renderComments();
-        });
-      } else {
+      this.fetch({
+        id: this.controller.get('id'),
+        context: this.controller 
+      }).then(function() {
+        _this.hideMiniLoader();
         _this.renderComments();
-      }
+      });
     },
     postComment: function() {
       if(this.canPostComment()) {
