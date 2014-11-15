@@ -14,7 +14,7 @@
 		</div>
 	</div>
 	{{#each itemController="video-list-item"}}
-		<div class="video" {{bind-attr data-id=id}} >
+		<div class="video-list-item" {{bind-attr data-id=id}} >
 			<div class="arrow-container">
 				<div {{bind-attr class=":arrow :up upClass"}} {{action "voteUp" on="click"}}></div>
 				<div {{bind-attr class=":arrow :down downClass"}} {{action "voteDown" on="click"}}></div>
