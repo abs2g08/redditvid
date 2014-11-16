@@ -18,10 +18,16 @@ You will need the following things properly installed on your computer.
 * `npm install`
 * `bower install`
 
-## Running / Development
+## Running
 
-* `ember server`
-* Visit your app at http://localhost:4200.
+Due to Reddit's lack of CORS support for its API. All requests have to be proxied through a node.js server located in /node_server.
+
+You can run it using `ember server`, but loggin in won't work.
+
+Proper way:
+
+* `./run.sh`
+* Visit your app at http://localhost:5000.
 
 ### Code Generators
 
@@ -39,7 +45,7 @@ Make use of the many generators for code, try `ember help generate` for more det
 
 ### Deploying
 
-Specify what it takes to deploy your app.
+If you have pulled this branch from openshift, deploying is as simple as `git push origin master`. 
 
 ## Further Reading / Useful Links
 
