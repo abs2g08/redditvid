@@ -1,8 +1,14 @@
 # Redditvid
 
-This README outlines the details of collaborating on this Ember application.
+Redditvid is a lighweight Reddit client that regurgitates [www.reddit.com/r/videos](www.reddit.com/r/videos) into a responsive web app. It's made using Ember.js CLI and hosted on Node.js. 
+I created it to better understand Ember, Ouath and SVG transitions.
+Currently it's possible to:			
 
-A short introduction of this app could easily go here.
+* List the top 25 trending vidoes
+* Login to reddit using oauth
+* Upvote or downvote a video
+* View any of these videos, and view top level comments
+* Leave a comment
 
 ## Prerequisites
 
@@ -13,7 +19,7 @@ You will need the following things properly installed on your computer.
 
 ## Installation
 
-* `git clone <repository-url>` this repository
+* `git clone https://github.com/abs2g08/redditvid.git` this repository
 * change into the new directory
 * `npm install`
 * `bower install`
@@ -22,7 +28,7 @@ You will need the following things properly installed on your computer.
 
 Due to Reddit's lack of CORS support for its API. All requests have to be proxied through a node.js server located in /node_server.
 
-You can run it using `ember server`, but loggin in won't work.
+You can still run the app using `ember server` but loggin in won't work.
 
 Proper way:
 

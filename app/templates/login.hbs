@@ -1,13 +1,14 @@
 <div class="login">
 	<h2>Login</h2>
 	<div class="text">
-	{{#if isLoggedIn}}
-		<div><b>Your Name:</b> {{name}} </span><span><b>Over 18:</b> {{over_18}} </div>
-		<div><span class="warn">Warning:</span> refreshing the page will log you out.</div>
-	{{else}}
-		<div>You are <b>not</b> logged in, please select login to continue.</div>
-		<div><span class="warn">Warning:</span> you will be temporarily redirected to reddits login page.</div>
-	{{/if}}
-	</div>
+	<p>
+		{{#if isLoggedIn}}
+			<b>Your Name:</b> {{name}}<b>, Over 18:</b> {{over_18}} <br>
+			<span class="warn">Warning:</span> refreshing the page will log you out. <br>
+		{{else}}
+			You are <b>not</b> logged in, please select login to continue. <br>
+			<span class="warn">Warning:</span> you will be temporarily redirected to reddits login page. <br>
+		{{/if}}
+	</p>
 	<button {{action "login"}}>login</button>
 </div>
