@@ -93,6 +93,10 @@ export default Ember.Route.extend(SVGLoader, {
     });
   },
 
+  deactivate: function() {
+    this.controller.set('showingComments', false);
+  },
+
   actions: {
     showComments: function() {
       this.controller.set('showingComments', true);
