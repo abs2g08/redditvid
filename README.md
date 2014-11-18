@@ -19,8 +19,8 @@ You will need the following things properly installed on your computer.
 
 ## Installation
 
-* `git clone https://github.com/abs2g08/redditvid.git` this repository
-* change into the new directory
+* `git clone https://github.com/abs2g08/redditvid.git`
+* `cd redditvid`
 * `npm install`
 * `bower install`
 
