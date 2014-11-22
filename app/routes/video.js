@@ -13,8 +13,30 @@ export default Ember.Route.extend(SVGLoader, {
     };
   },
 
+  buildReplyTree: function(nextRawReplyData, lastReply, callback) {
+    if(nextRawReplyData == "") {
+      callback();
+    } else {
+      for(var i=0; i<(nextRawReplyData.data.children.length-1); i++) {
+        var rawReply = nextRawReplyData.data.children[i].data;
+
+        var reply = {};
+        reply.author = rawReply.author;
+        reply.body = rawReply.body;
+
+        if(!lastReply.replies) {
+          lastReply.replies = [];
+        }
+
+        lastReply.replies.unshift(reply);
+        this.buildReplyTree(rawReply.replies, reply, callback);
+      }
+    }
+  },
+
   fetch: function(options) {
     this.showMiniLoader();
+    var _this = this;
     return Ember.$.getJSON('http://www.reddit.com/r/videos/comments/' + options.id + '.json').then(function(rawData) {
       var item = {};
       var video_data = rawData[0].data.children[0].data;
@@ -22,10 +44,14 @@ export default Ember.Route.extend(SVGLoader, {
       item.id = options.id;
       item.media_embed = video_data.media_embed.content;
       item.title = video_data.title;
+
       item.comments = rawData[1].data.children.map(function(rawComment) {
         var comment = {};
         comment.text = rawComment.data.body;
         comment.author = rawComment.data.author;
+        if(rawComment.data.text && rawComment.data.body) {
+          _this.buildReplyTree(rawComment.data.replies, comment, function(){});
+        }
         return comment;
       });
 

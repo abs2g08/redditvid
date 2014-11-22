@@ -84,6 +84,7 @@ export default Ember.Route.extend(SVGLoader, {
         return item;
       });
     }).fail(function() {
+      alert('there was an error getting the videos');
       _this.loader.hide();
     });    
   },
