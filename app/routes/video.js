@@ -14,7 +14,7 @@ export default Ember.Route.extend(SVGLoader, {
   },
 
   buildReplyTree: function(nextRawReplyData, lastReply, callback) {
-    if(nextRawReplyData == "") {
+    if(nextRawReplyData === "") {
       callback();
     } else {
       for(var i=0; i<(nextRawReplyData.data.children.length-1); i++) {
@@ -49,9 +49,10 @@ export default Ember.Route.extend(SVGLoader, {
         var comment = {};
         comment.text = rawComment.data.body;
         comment.author = rawComment.data.author;
-        if(rawComment.data.text && rawComment.data.body) {
+        if(rawComment.data.author && rawComment.data.body) {
           _this.buildReplyTree(rawComment.data.replies, comment, function(){});
         }
+
         return comment;
       });
 
