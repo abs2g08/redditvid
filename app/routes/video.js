@@ -22,7 +22,7 @@ export default Ember.Route.extend(SVGLoader, {
 
         var reply = {};
         reply.author = rawReply.author;
-        reply.body = rawReply.body;
+        reply.text = rawReply.body;
 
         if(!lastReply.replies) {
           lastReply.replies = [];
@@ -114,9 +114,14 @@ export default Ember.Route.extend(SVGLoader, {
   },
 
   renderComments: function() {
+
+    var commentsController = this.controllerFor('comments');
+    commentsController.set('model', this.controller.get('comments'));
+
     this.render('components/comments', {
       outlet: 'comments',
       into: 'video',
+      controller: commentsController
     });
   },
 
