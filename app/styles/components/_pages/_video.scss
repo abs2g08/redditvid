@@ -1,0 +1,27 @@
+.video {
+
+  .info {
+    padding: 5px 5px 5px 15px;
+    .title {
+      padding-bottom: 10px;
+    }
+
+    iframe {
+      width:100%;
+    }
+
+    textarea {
+      margin-left: 1px;
+      width: 100%;
+    }
+  }
+
+  .comment {
+    padding: 5px 5px 5px 15px;
+
+    p {
+      padding-top: 0px;
+      padding-bottom: 10px;
+    }
+  }
+}

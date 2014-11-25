@@ -1,0 +1,16 @@
+<div class="comment">
+
+	{{#if model}}
+		<span><b>{{model.author}}</b></span> <span>{{showdown-addon model.text}}</span>
+	{{else}}
+		<span><b>{{author}}</b></span> <span>{{ showdown-addon text }}</span>
+	{{/if}}
+
+	{{#if model.replies}}
+		{{render 'components/comments' model.replies}}
+	{{/if}}
+
+	{{#if replies}}
+		{{render 'components/comments' replies}}
+	{{/if}}
+</div>

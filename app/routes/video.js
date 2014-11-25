@@ -13,24 +13,36 @@ export default Ember.Route.extend(SVGLoader, {
     };
   },
 
-  buildReplyTree: function(nextRawReplyData, lastReply, callback) {
-    if(nextRawReplyData === "") {
-      callback();
+  buildReplyTree: function(nextRawReplyData, lastReply, replyTree, promise) {
+    if(typeof promise === 'undefined') {
+        promise = new Ember.$.Deferred();
+    }
+
+    if(typeof nextRawReplyData === 'undefined' || nextRawReplyData === "") {
+      return promise.resolve();
     } else {
-      for(var i=0; i<(nextRawReplyData.data.children.length-1); i++) {
-        var rawReply = nextRawReplyData.data.children[i].data;
+
+      var _this = this;
+
+      return Ember.$.when(nextRawReplyData.data.children.map(function(rawData) {
+        var rawReply = rawData.data;
+
+        if (typeof rawReply.author === 'undefined' && typeof rawReply.text === 'undefined') {
+          return promise.resolve();
+        }
 
         var reply = {};
         reply.author = rawReply.author;
         reply.text = rawReply.body;
+        reply.text_html = rawReply.body_html;
 
         if(!lastReply.replies) {
           lastReply.replies = [];
         }
 
         lastReply.replies.unshift(reply);
-        this.buildReplyTree(rawReply.replies, reply, callback);
-      }
+        return _this.buildReplyTree(rawReply.replies, reply, replyTree);
+      }));
     }
   },
 
@@ -45,24 +57,21 @@ export default Ember.Route.extend(SVGLoader, {
       item.media_embed = video_data.media_embed.content;
       item.title = video_data.title;
 
-      item.comments = rawData[1].data.children.map(function(rawComment) {
-        var comment = {};
-        comment.text = rawComment.data.body;
-        comment.author = rawComment.data.author;
-        if(rawComment.data.author && rawComment.data.body) {
-          _this.buildReplyTree(rawComment.data.replies, comment, function(){});
-        }
-
-        return comment;
-      });
-
       if(options.context) {
         Ember.$.each(item, function(key, value) {
           options.context.set(key, value);
         });
       }
 
-      return item;
+      //debugger;
+
+      var comment = {};
+      // var __this = this;
+      return _this.buildReplyTree(rawData[1], comment, comment).then(function() {
+        //var x = __this.comment;
+        item.comments = comment.replies;
+        return item;
+      });
     });
   },
 
