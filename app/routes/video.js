@@ -51,6 +51,8 @@ export default Ember.Route.extend(SVGLoader, {
       var item = {};
       var video_data = rawData[0].data.children[0].data;
 
+      debugger;
+
       item.id = options.id;
       item.media_embed = video_data.media_embed.content;
       item.title = video_data.title;

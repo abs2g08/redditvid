@@ -80,7 +80,9 @@ export default Ember.Route.extend(SVGLoader, {
         item.score = rawItem.data.score;
         item.created_utc = rawItem.data.created_utc;
         item.id = rawItem.data.id;
+
         item.media_embed = rawItem.data.media_embed.content;
+        item.url = rawItem.data.url;
         return item;
       });
     }).fail(function() {

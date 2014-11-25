@@ -22,7 +22,12 @@
 			</div>
 			<div class="text-container">
 				<div class="top">
-					<span class="score">{{score}}</span><span class="vid_link">{{#linkTo 'video' this}} {{title}} {{/linkTo}}</span>
+					<span class="score">{{score}}</span>
+					{{#if media_embed}}
+						<span class="vid_link">{{#linkTo 'video' this}} {{title}} {{/linkTo}}</span>
+					{{else}}
+						<span class="vid_link"><a href="{{unbound url}}">{{title}}</a></span>
+					{{/if}}
 				</div>
 				<div class="bottom">
 					<span class="author">Posted by <i>{{author}} {{postedAgo}}</i></span>
