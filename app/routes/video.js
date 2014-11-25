@@ -13,17 +13,15 @@ export default Ember.Route.extend(SVGLoader, {
     };
   },
 
-  buildReplyTree: function(nextRawReplyData, lastReply, replyTree, promise) {
-    if(typeof promise === 'undefined') {
-        promise = new Ember.$.Deferred();
-    }
+  buildReplyTree: function(nextRawReplyData, lastReply, replyTree) {
+
+    var promise = new Ember.$.Deferred();
 
     if(typeof nextRawReplyData === 'undefined' || nextRawReplyData === "") {
       return promise.resolve();
     } else {
 
       var _this = this;
-
       return Ember.$.when(nextRawReplyData.data.children.map(function(rawData) {
         var rawReply = rawData.data;
 
@@ -40,7 +38,7 @@ export default Ember.Route.extend(SVGLoader, {
           lastReply.replies = [];
         }
 
-        lastReply.replies.unshift(reply);
+        lastReply.replies.push(reply);
         return _this.buildReplyTree(rawReply.replies, reply, replyTree);
       }));
     }
@@ -63,12 +61,8 @@ export default Ember.Route.extend(SVGLoader, {
         });
       }
 
-      //debugger;
-
       var comment = {};
-      // var __this = this;
       return _this.buildReplyTree(rawData[1], comment, comment).then(function() {
-        //var x = __this.comment;
         item.comments = comment.replies;
         return item;
       });
