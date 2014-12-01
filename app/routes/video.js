@@ -51,8 +51,6 @@ export default Ember.Route.extend(SVGLoader, {
       var item = {};
       var video_data = rawData[0].data.children[0].data;
 
-      debugger;
-
       item.id = options.id;
       item.media_embed = video_data.media_embed.content;
       item.title = video_data.title;
@@ -119,7 +117,6 @@ export default Ember.Route.extend(SVGLoader, {
   },
 
   renderComments: function() {
-
     var commentsController = this.controllerFor('comments');
     commentsController.set('model', this.controller.get('comments'));
 
@@ -136,15 +133,19 @@ export default Ember.Route.extend(SVGLoader, {
 
   actions: {
     showComments: function() {
-      this.controller.set('showingComments', true);
       var _this = this;
-      this.fetch({
-        id: this.controller.get('id'),
-        context: this.controller 
-      }).then(function() {
-        _this.hideMiniLoader();
-        _this.renderComments();
-      });
+      if(this.controller.get('showingComments')) {
+        this.fetch({
+          id: this.controller.get('id'),
+          context: this.controller 
+        }).then(function() {
+          _this.hideMiniLoader();
+          _this.renderComments();
+        });        
+      } else {
+        this.controller.set('showingComments', true);
+        _this.renderComments();        
+      }
     },
     postComment: function() {
       if(this.canPostComment()) {
