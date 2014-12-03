@@ -13,10 +13,11 @@ export default Ember.Route.extend(SVGLoader, {
     };
   },
 
-  buildReplyTree: function(nextRawReplyData, lastReply, replyTree) {
+  buildReplyTree: function(nextRawReplyData, lastReply) {
 
     var promise = new Ember.$.Deferred();
 
+    //if we hit a dead end of the tree
     if(typeof nextRawReplyData === 'undefined' || nextRawReplyData === "") {
       return promise.resolve();
     } else {
@@ -25,6 +26,7 @@ export default Ember.Route.extend(SVGLoader, {
       return Ember.$.when(nextRawReplyData.data.children.map(function(rawData) {
         var rawReply = rawData.data;
 
+        //if we hit a dead end of the tree
         if (typeof rawReply.author === 'undefined' && typeof rawReply.text === 'undefined') {
           return promise.resolve();
         }
@@ -39,12 +41,12 @@ export default Ember.Route.extend(SVGLoader, {
         }
 
         lastReply.replies.push(reply);
-        return _this.buildReplyTree(rawReply.replies, reply, replyTree);
+        return _this.buildReplyTree(rawReply.replies, reply);
       }));
     }
   },
 
-  fetch: function(options) {
+  fetchComments: function(options) {
     this.showMiniLoader();
     var _this = this;
     return Ember.$.getJSON('http://www.reddit.com/r/videos/comments/' + options.id + '.json').then(function(rawData) {
@@ -62,14 +64,14 @@ export default Ember.Route.extend(SVGLoader, {
       }
 
       var comment = {};
-      return _this.buildReplyTree(rawData[1], comment, comment).then(function() {
+      return _this.buildReplyTree(rawData[1], comment).then(function() {
         item.comments = comment.replies;
         return item;
       });
     });
   },
 
-  post: function() {
+  postComment: function() {
     var _this = this;
     return Ember.$.ajax({
       type: "POST",
@@ -111,7 +113,7 @@ export default Ember.Route.extend(SVGLoader, {
 
   model: function(params) {
     var _this = this;
-    return this.fetch({ id: params.id }).fail(function() {
+    return this.fetchComments({ id: params.id }).fail(function() {
       _this.loader.hide();
     });
   },
@@ -135,7 +137,9 @@ export default Ember.Route.extend(SVGLoader, {
     showComments: function() {
       var _this = this;
       if(this.controller.get('showingComments')) {
-        this.fetch({
+
+        //frefresh comments from server
+        this.fetchComments({
           id: this.controller.get('id'),
           context: this.controller 
         }).then(function() {
@@ -150,7 +154,7 @@ export default Ember.Route.extend(SVGLoader, {
     postComment: function() {
       if(this.canPostComment()) {
         this.showMiniLoader();
-        this.post();
+        this.postComment();
       }
     }
   }

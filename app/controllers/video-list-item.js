@@ -30,7 +30,7 @@ export default Ember.ObjectController.extend({
   	return false;
   },
 
-  post: function(direction) {
+  postVote: function(direction) {
   	if(this.canVote()) {
 	  var _this = this;
     
@@ -60,10 +60,10 @@ export default Ember.ObjectController.extend({
 
   actions: {
   	voteUp: function() {
-  	  this.post(1);
+  	  this.postVote(1);
   	},
   	voteDown: function() {
-	    this.post(-1);
+	    this.postVote(-1);
   	}
   }
 });
