@@ -12,7 +12,11 @@ Currently it's possible to:
 
 ## Screen Shots
 
+Front Page
 ![Alt text](http://i.imgur.com/ASckNar.png =197x350 "Front Page")
+
+Front Page - Menu Open
+
 ![Alt text](http://i.imgur.com/5ruUsZp.png =197x350 "Front Page - Menu Open")
 
 ## Prerequisites
