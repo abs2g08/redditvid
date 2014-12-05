@@ -12,8 +12,8 @@ Currently it's possible to:
 
 ## Screen Shots
 
-![Alt text](/screen_shots/screen_shot1.jpg?raw=true "Front Page")
-![Alt text](/screen_shots/screen_shot2.jpg?raw=true "Front Page - Menu Open")
+![Alt text](http://i.imgur.com/ASckNar.png "Front Page")
+![Alt text](http://i.imgur.com/5ruUsZp.png "Front Page - Menu Open")
 
 ## Prerequisites
 
