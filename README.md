@@ -10,6 +10,11 @@ Currently it's possible to:
 * View any of these videos, and view top level comments
 * Leave a comment
 
+## Screen Shots
+
+![Alt text](/screen_shots/screen_shot1.jpg?raw=true "Front Page")
+![Alt text](/screen_shots/screen_shot2.jpg?raw=true "Front Page - Menu Open")
+
 ## Prerequisites
 
 You will need the following things properly installed on your computer.
