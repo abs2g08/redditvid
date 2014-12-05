@@ -12,8 +12,8 @@ Currently it's possible to:
 
 ## Screen Shots
 
-![Alt text](http://i.imgur.com/ASckNar.png "Front Page")
-![Alt text](http://i.imgur.com/5ruUsZp.png "Front Page - Menu Open")
+![Alt text](http://i.imgur.com/ASckNar.png =197x350 "Front Page")
+![Alt text](http://i.imgur.com/5ruUsZp.png =197x350 "Front Page - Menu Open")
 
 ## Prerequisites
 
