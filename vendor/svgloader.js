@@ -10,6 +10,9 @@ function extend( a, b ) {
 }
 
 function SVGLoader( el, options ) {
+
+	if(!el) throw "Please specify DOM element";
+	
 	this.el = el;
 	this.options = extend( {}, this.options );
 	extend( this.options, options );

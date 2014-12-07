@@ -15,6 +15,7 @@ export default Ember.Route.extend(SVGLoader, {
 
   buildReplyTree: function(nextRawReplyData, lastReply) {
 
+    //create promise for each level of tree
     var promise = new Ember.$.Deferred();
 
     //if we hit a dead end of the tree
@@ -48,6 +49,7 @@ export default Ember.Route.extend(SVGLoader, {
 
   fetchComments: function(options) {
     this.showMiniLoader();
+    
     var _this = this;
     return Ember.$.getJSON('http://www.reddit.com/r/videos/comments/' + options.id + '.json').then(function(rawData) {
       var item = {};
