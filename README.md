@@ -1,13 +1,14 @@
 # Redditvid
 
-Redditvid is a lighweight Reddit client that regurgitates [www.reddit.com/r/videos](www.reddit.com/r/videos) in responsive form. It's made using Ember.js CLI and hosted on Node.js. 
+Redditvid is a lighweight client that regurgitates [www.reddit.com/r/videos](www.reddit.com/r/videos) into a responsive form. It's made using Ember CLI and hosted on Node.js. 
 I created it to better understand Ember, Ouath and SVG transitions.
 Currently it's possible to:			
 
-* List the top 25 trending vidoes
-* Login to reddit using oauth
+* List top 25 trending vidoes
+* Login using oauth
 * Upvote or downvote a video
-* View any of these videos, and view top level comments
+* View videos
+* View top level comments
 * Leave a comment
 
 ## Screen Shots
@@ -38,7 +39,7 @@ You will need the following things properly installed on your computer.
 
 Due to Reddit's lack of CORS support for its API. All requests have to be proxied through a node.js server located in /node_server.
 
-You can still run the app using `ember server` but loggin in won't work.
+You can still run it using `ember server` but loggin in won't work.
 
 Proper way:
 
