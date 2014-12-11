@@ -16,7 +16,7 @@ Screen Shot 1
 
 ![Front Page Image](http://i.imgur.com/ASckNar.png =197x350 "Front Page")
 
-Screen shot 2
+Screen Shot 2
 
 ![Front Page Menu Open](http://i.imgur.com/5ruUsZp.png =197x350 "Front Page - Menu Open")
 

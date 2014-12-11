@@ -36,6 +36,8 @@ export default Ember.Route.extend(SVGLoader, {
         reply.author = rawReply.author;
         reply.text = rawReply.body;
         reply.text_html = rawReply.body_html;
+        reply.created_utc = rawReply.created_utc;
+        reply.score = rawReply.score;
 
         if(!lastReply.replies) {
           lastReply.replies = [];

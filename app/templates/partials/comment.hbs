@@ -1,10 +1,24 @@
 <div class="comment">
 
 	{{#if model}}
-		<span><b>{{model.author}}</b></span> <span>{{showdown-addon model.text}}</span>
+		<div class="title">
+			<span class="author">{{model.author}}</span> <span class="meta">{{model.score}} points {{posted-ago model.created_utc}}</span>
+		</div>
+		<div class="body">
+			<span>{{showdown-addon model.text}}</span>
+		</div>
 	{{else}}
-		<span><b>{{author}}</b></span> <span>{{ showdown-addon text }}</span>
+		<div class="title">
+			<span class="author"><b>{{author}}</b></span> <span class="meta">{{score}} points {{posted-ago created_utc}}</span>
+		</div>
+		<div class="body">
+			<span>{{showdown-addon text}}</span>
+		</div>
 	{{/if}}
+
+{{!-- 	<span class="info">
+		{{model.score}} points {{posted-ago model.created_utc}}
+	</span> --}}
 
 	{{#if model.replies}}
 		{{render 'components/comments' model.replies}}

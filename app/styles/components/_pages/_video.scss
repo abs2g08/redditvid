@@ -23,10 +23,24 @@
     padding: 5px 5px 5px 15px;
     border-left: 1px solid rgb(240, 240, 240);
     
-    p {
-      padding-top: 0px;
-      line-height: 1.2em;
-      padding-bottom: 10px;
+    .title {
+      .author {
+        font-weight: bold;
+      }
+
+      .meta {
+        color: #888;
+        font-style: italic;
+        font-size: 0.9em;
+      }
+    }
+
+    .body {
+      p {
+        padding-top: 0px;
+        line-height: 1.2em;
+        padding-bottom: 10px;
+      }
     }
   }
 }
