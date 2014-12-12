@@ -18,6 +18,7 @@ export default Ember.Route.extend(SVGLoader, {
   },
 
   resetController: function (controller, isExiting, transition) {
+    //clear query params when leaving route, otherwise they hang around
     if (isExiting) {
       controller.set('state', null);
       controller.set('code', null);
