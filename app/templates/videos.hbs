@@ -2,7 +2,7 @@
 	<div class="control-pannel">
 		<div class="button-container">
 			<h2>Videos</h2>
-			{{#if user}}
+			{{#if user.isLoggedIn}}
 				<div class="name">
 					You are logged in as: <b>{{user.name}}</b>
 				</div>

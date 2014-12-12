@@ -3,10 +3,7 @@ import Ember from 'ember';
 // videos router would not pass 'state' or 'code' into 'function: model(params)'
 
 export default Ember.ArrayController.extend({
-  queryParams: {
-    state: "state",
-    code: "code"
-  },
+  queryParams: ["state", "code"],
   user: null,
   state: null,
   code: null,

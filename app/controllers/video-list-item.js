@@ -4,11 +4,6 @@ import User from '../models/user';
 export default Ember.ObjectController.extend({
   dir: 0,
 
-  // postedAgo: function() {
-  // 	var createdDate = moment.unix(this.get('created_utc'));
-	 //  return createdDate.fromNow();
-  // }.property('created_utc'),
-
   upClass: function() {
   	return this.get('dir') === 1 ? "selected" : "";
   }.property('dir'),

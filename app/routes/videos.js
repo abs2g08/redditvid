@@ -17,6 +17,13 @@ export default Ember.Route.extend(SVGLoader, {
       window.history.replaceState( {} , '', '/' );
   },
 
+  resetController: function (controller, isExiting, transition) {
+    if (isExiting) {
+      controller.set('state', null);
+      controller.set('code', null);
+    }
+  },
+
   getAccessToken: function(params) {
     var _this = this;
     var url = '/ssl-reddit/api/v1/access_token';
@@ -94,6 +101,7 @@ export default Ember.Route.extend(SVGLoader, {
   model: function(params) {
     var _this = this;
     if(params.state && params.code && !User.isLoggedIn) {
+      debugger;
       return this.getAccessToken(params).then(function() {
         return _this.getVideos();
       });

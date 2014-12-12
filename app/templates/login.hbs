@@ -10,5 +10,9 @@
 			<span class="warn">Warning:</span> you will be temporarily redirected to reddits login page. <br>
 		{{/if}}
 	</p>
-	<button {{action "login"}}>login</button>
+	{{#if isLoggedIn}}
+		<button {{action "logout"}}>logout</button>
+	{{else}}
+		<button {{action "login"}}>login</button>
+	{{/if}}
 </div>
