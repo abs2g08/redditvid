@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import SVGLoader from '../mixins/svgloader';
-import User from '../models/user';
+import user from '../models/user';
 
 export default Ember.Route.extend(SVGLoader, {
   text: null,
@@ -81,7 +81,7 @@ export default Ember.Route.extend(SVGLoader, {
       type: "POST",
       url: "/oath-reddit/api/comment",
       headers: {
-        "Authorization": "bearer " + User.access_token,
+        "Authorization": "bearer " + user.access_token,
       },
       dataType: 'json',
       data: { 
@@ -95,7 +95,7 @@ export default Ember.Route.extend(SVGLoader, {
       _this.controller.set('text', '');
     }).fail(function(data) {
       if(data.statusText === "Unauthorized") {
-        User.isLoggedIn = false;
+        user.isLoggedIn = false;
         alert('your session has expired'); 
       }
     }).always(function() {
@@ -104,7 +104,7 @@ export default Ember.Route.extend(SVGLoader, {
   },
 
   canPostComment: function() {
-    if(User.isLoggedIn) {
+    if(user.isLoggedIn) {
       if(this.modelFor('video').text !== '') {
         return true;
       } else {

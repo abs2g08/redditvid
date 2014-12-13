@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import SVGLoader from '../mixins/svgloader';
-import User from '../models/user';
+import user from '../models/user';
 
 export default Ember.Route.extend(SVGLoader, {
   init: function() {
@@ -44,7 +44,7 @@ export default Ember.Route.extend(SVGLoader, {
 
   model: function(params) {
     var _this = this;
-    if(params.state && params.code && !User.isLoggedIn) {
+    if(params.state && params.code && !user.isLoggedIn) {
       return _this.controllerFor('oauth').getAccessToken(params).then(function() {
         return _this.getVideos();
       }).fail(function() {

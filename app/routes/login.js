@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import SVGLoader from '../mixins/svgloader';
-import User from '../models/user';
+import user from '../models/user';
 
 export default Ember.Route.extend(SVGLoader, {
   init: function() {
@@ -12,8 +12,8 @@ export default Ember.Route.extend(SVGLoader, {
   },
 
   model: function() {
-    if(User.isLoggedIn) {
-      return User;
+    if(user.isLoggedIn) {
+      return user;
     } else {
       return {};
     }

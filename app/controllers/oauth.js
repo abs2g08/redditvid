@@ -1,9 +1,8 @@
 import Ember from 'ember';
 import config from '../config/environment';
-import User from '../models/user';
+import user from '../models/user';
 
 export default Ember.ObjectController.extend({
-  User: User,
   login: function() {
   	var options = this.authorizationModel();
     var url = "https://ssl.reddit.com/api/v1/authorize?client_id="+options.client_id+"&response_type="+options.response_type+"&state="+options.init_state+"&redirect_uri="+options.redirect_uri+"&duration="+options.duration+"&scope="+options.scope;
@@ -11,7 +10,7 @@ export default Ember.ObjectController.extend({
   },
 
   logout: function() {
-    this.User.clear();
+    user.clear();
 	this.transitionToRoute('videos');
    },
 
@@ -25,18 +24,18 @@ export default Ember.ObjectController.extend({
     return Ember.$.ajax({
       type: "GET",
       headers: {
-        "Authorization": "bearer " + this.User.access_token,
+        "Authorization": "bearer " + user.access_token,
       },
       dataType: 'json',
       url: '/oath-reddit/api/v1/me',
     }).then(function(data) {
 
-      _this.User.name = data.name;
-      _this.User.over_18 = data.over_18;
-      _this.User.isLoggedIn = true;
-      _this.User.comment_karma = data.comment_karma;
+      user.name = data.name;
+      user.over_18 = data.over_18;
+      user.isLoggedIn = true;
+      user.comment_karma = data.comment_karma;
       
-      _this.controllerFor('videos').set('user', _this.User);
+      _this.controllerFor('videos').set('user', user);
       _this.clearAuthUrl();
 
     }).fail(function() {
@@ -101,7 +100,7 @@ export default Ember.ObjectController.extend({
 	    state: params.state 
 	  },
 	}).then(function(data) {
-	  _this.User.access_token = data.access_token;
+	  user.access_token = data.access_token;
 	  return _this.getUserInfo();
 	}).fail(function(){
 	  alert('error trying to gain access token');
