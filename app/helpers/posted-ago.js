@@ -2,8 +2,8 @@ import Ember from 'ember';
 
 export default Ember.Handlebars.makeBoundHelper(function(value) {
   try {
-  	return new Ember.Handlebars.SafeString(Ember.$.parseHTML(value)[0].data);
+  	return moment.unix(value).fromNow();
   } catch(err) {
-  	alert('error parsing video');
+  	alert('error creating date');
   }
 });
