@@ -11,6 +11,8 @@ import user from '../models/user';
  */
 
 export default Ember.ObjectController.extend({
+
+  //https://github.com/reddit/reddit/wiki/OAuth2#authorization
   login: function() {
   	var options = this.authorizationModel();
     var url = "https://ssl.reddit.com/api/v1/authorize?client_id="+options.client_id+"&response_type="+options.response_type+"&state="+options.init_state+"&redirect_uri="+options.redirect_uri+"&duration="+options.duration+"&scope="+options.scope;
@@ -25,10 +27,11 @@ export default Ember.ObjectController.extend({
     });
    },
 
-  clearAuthUrl: function() {
-    window.history.replaceState( {} , '', '/' );
-  },
+   clearAuthUrl: function() {
+     window.history.replaceState( {} , '', '/' );
+   },
 
+   //https://www.reddit.com/dev/api#GET_api_v1_me
    getUserInfo: function() {
     var _this = this;	
 
@@ -37,7 +40,6 @@ export default Ember.ObjectController.extend({
       headers: {
         "Authorization": "bearer " + user.access_token,
       },
-      dataType: 'json',
       url: '/oath-reddit/api/v1/me',
     }).then(function(data) {
 
@@ -93,7 +95,7 @@ export default Ember.ObjectController.extend({
 	 };
    },
 
-   //Manually Revoking a Token
+   //https://github.com/reddit/reddit/wiki/OAuth2#manually-revoking-a-token
    revokeAccessToken: function() {
    	var url = '/ssl-reddit/api/v1/revoke_token';
 
@@ -111,6 +113,7 @@ export default Ember.ObjectController.extend({
 	});   	 
    },
 
+   //https://github.com/reddit/reddit/wiki/OAuth2#token-retrieval-code-flow
    getAccessToken: function(params) {
    	var _this = this;
 	var url = '/ssl-reddit/api/v1/access_token';
@@ -134,4 +137,6 @@ export default Ember.ObjectController.extend({
 	  alert('error trying to gain access token');
 	});
    }
+
+   //TO-DO: https://github.com/reddit/reddit/wiki/OAuth2#refreshing-the-token
 });
