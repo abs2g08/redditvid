@@ -2,6 +2,14 @@ import Ember from 'ember';
 import config from '../config/environment';
 import user from '../models/user';
 
+/**
+ * oauth allows redditvid to authenticate with reddit's public API.
+ * 
+ * Authenticated as 'installed app' as frontend apps can't keep a secret.
+ *
+ * See: https://github.com/reddit/reddit/wiki/OAuth2
+ */
+
 export default Ember.ObjectController.extend({
   login: function() {
   	var options = this.authorizationModel();
@@ -10,8 +18,11 @@ export default Ember.ObjectController.extend({
   },
 
   logout: function() {
-    user.clear();
-	this.transitionToRoute('videos');
+  	var _this = this;
+    this.revokeAccessToken().then(function() {
+    	user.clear();
+		_this.transitionToRoute('videos');
+    });
    },
 
   clearAuthUrl: function() {
@@ -19,7 +30,7 @@ export default Ember.ObjectController.extend({
   },
 
    getUserInfo: function() {
-    var _this = this;
+    var _this = this;	
 
     return Ember.$.ajax({
       type: "GET",
@@ -82,6 +93,24 @@ export default Ember.ObjectController.extend({
 	 };
    },
 
+   //Manually Revoking a Token
+   revokeAccessToken: function() {
+   	var url = '/ssl-reddit/api/v1/revoke_token';
+
+	return Ember.$.ajax({
+	  type: "POST",
+	  url: url,
+	  headers: {
+	    "Authorization": "Basic " + btoa(config.APP.REDDIT.client_id + ":" + ''),
+	  },	  
+	  data: { 
+	  	token: user.access_token,
+	  },
+	}).fail(function() {
+	  alert('error trying to revoke token');
+	});   	 
+   },
+
    getAccessToken: function(params) {
    	var _this = this;
 	var url = '/ssl-reddit/api/v1/access_token';
@@ -92,7 +121,6 @@ export default Ember.ObjectController.extend({
 	  headers: {
 	    "Authorization": "Basic " + btoa(config.APP.REDDIT.client_id + ":" + ''),
 	  },
-	  dataType: 'json',
 	  data: { 
 	    grant_type: 'authorization_code', 
 	    code: params.code,

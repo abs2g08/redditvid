@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import User from '../models/user';
+import user from '../models/user';
 
 export default Ember.ObjectController.extend({
   dir: 0,
@@ -13,7 +13,7 @@ export default Ember.ObjectController.extend({
   }.property('dir'),
 
   canVote: function() {
-  	if(User.isLoggedIn) {
+  	if(user.isLoggedIn) {
   		if(this.get('dir') === 0) {
   			return true;
   		} else {
@@ -33,7 +33,7 @@ export default Ember.ObjectController.extend({
       	type: "POST",
 	      url: "/oath-reddit/api/vote",
       	headers: {
-        	"Authorization": "bearer " + User.access_token,
+        	"Authorization": "bearer " + user.access_token,
       	},
       	dataType: 'json',
       	data: { 
@@ -44,7 +44,7 @@ export default Ember.ObjectController.extend({
       	 _this.set('dir', direction);
       }).fail(function(data) {
          if(data.statusText === "Unauthorized") {
-          User.isLoggedIn = false;
+          user.isLoggedIn = false;
             alert('your session has expired'); 
          } else {
             alert('error trying to vote');

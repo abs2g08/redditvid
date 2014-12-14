@@ -14,8 +14,6 @@ export default Ember.Route.extend(SVGLoader, {
   model: function() {
     if(user.isLoggedIn) {
       return user;
-    } else {
-      return {};
     }
   }
 });
