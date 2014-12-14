@@ -5,14 +5,14 @@ import user from '../models/user';
 /**
  * oauth allows redditvid to authenticate with reddit's public API.
  * 
- * Authenticated as 'installed app' as frontend apps can't keep a secret.
+ * Authenticated as 'installed app' using implicit grant flow. Frontend apps can't keep a secret.
  *
  * See: https://github.com/reddit/reddit/wiki/OAuth2
  */
 
 export default Ember.ObjectController.extend({
 
-  //https://github.com/reddit/reddit/wiki/OAuth2#authorization
+  //https://github.com/reddit/reddit/wiki/OAuth2#token-retrieval-implicit-grant-flow
   login: function() {
   	var options = this.authorizationModel();
     var url = "https://ssl.reddit.com/api/v1/authorize?client_id="+options.client_id+"&response_type="+options.response_type+"&state="+options.init_state+"&redirect_uri="+options.redirect_uri+"&duration="+options.duration+"&scope="+options.scope;
@@ -22,8 +22,8 @@ export default Ember.ObjectController.extend({
   logout: function() {
   	var _this = this;
     this.revokeAccessToken().then(function() {
-    	user.clear();
-		_this.transitionToRoute('videos');
+      user.clear();
+	  _this.transitionToRoute('videos');
     });
    },
 
@@ -51,8 +51,15 @@ export default Ember.ObjectController.extend({
       _this.controllerFor('videos').set('user', user);
       _this.clearAuthUrl();
 
-    }).fail(function() {
-      alert('error getting user details');
+    }).fail(function(data) {
+      if(data.responseJSON["error"] === 401) {
+      	user.isLoggedIn = false;
+      	alert('Your session has expired');
+      	_this.login();
+      } else {
+      	debugger;
+      	alert('Error getting user details');
+      }
     });
    },
 
@@ -109,7 +116,7 @@ export default Ember.ObjectController.extend({
 	  	token: user.access_token,
 	  },
 	}).fail(function() {
-	  alert('error trying to revoke token');
+	  alert('Error trying to revoke token');
 	});   	 
    },
 
@@ -134,9 +141,7 @@ export default Ember.ObjectController.extend({
 	  user.access_token = data.access_token;
 	  return _this.getUserInfo();
 	}).fail(function(){
-	  alert('error trying to gain access token');
+	  alert('Error trying to gain access token');
 	});
    }
-
-   //TO-DO: https://github.com/reddit/reddit/wiki/OAuth2#refreshing-the-token
 });

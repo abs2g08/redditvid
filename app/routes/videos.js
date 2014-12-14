@@ -1,14 +1,28 @@
 import Ember from 'ember';
 import SVGLoader from '../mixins/svgloader';
 import user from '../models/user';
+import Poller from '../mixins/poller';
 
-export default Ember.Route.extend(SVGLoader, {
+export default Ember.Route.extend(SVGLoader, Poller, {
   init: function() {
     this.loaderOptions = { 
       speedIn : 0,
       speedOut : 500,
-      delay : 1000
+      delay : 5000
     };
+  },
+
+  setupController: function (controller, model) {
+    this._super(controller, model);
+    if(user.isLoggedIn) {
+      this.start();
+    }
+  },
+
+  onPoll: function() {
+    // Implicit grant flow tokens are only valid for 1 hour. 
+    // before this happens, onPoll will trigger prompting use to login again
+    this.controllerFor('oauth').login();
   },
 
   resetController: function (controller, isExiting) {
@@ -37,7 +51,7 @@ export default Ember.Route.extend(SVGLoader, {
         return item;
       });
     }).fail(function() {
-      alert('there was an error getting the videos');
+      alert('There was an error getting the videos');
       _this.loader.hide();
     });    
   },

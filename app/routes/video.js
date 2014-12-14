@@ -85,18 +85,19 @@ export default Ember.Route.extend(SVGLoader, {
       },
       dataType: 'json',
       data: { 
-        api_type: "json",
+        api_type: 'json',
         //see http://www.reddit.com/dev/api#fullnames
         thing_id: 't3_' + this.controller.get('id'),
         text: this.controller.get('text')
       },
     }).then(function() {
-      alert('your comment has been posted');
+      alert('Your comment has been posted');
       _this.controller.set('text', '');
     }).fail(function(data) {
-      if(data.statusText === "Unauthorized") {
+      if(data.statusText === 'Unauthorized') {
         user.isLoggedIn = false;
-        alert('your session has expired'); 
+        alert('Your session has expired');
+        _this.controllerFor('oauth').login();
       }
     }).always(function() {
       _this.hideMiniLoader();
@@ -108,10 +109,10 @@ export default Ember.Route.extend(SVGLoader, {
       if(this.modelFor('video').text !== '') {
         return true;
       } else {
-        alert('you must enter some text before you post');
+        alert('You must enter some text before you post');
       }
     } else {
-      alert('you must be logged in to comment');
+      alert('You must be logged in to comment');
     }
   },
 
