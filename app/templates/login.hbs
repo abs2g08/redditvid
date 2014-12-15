@@ -1,8 +1,12 @@
 <div class="login">
-	<h2>Login</h2>
+	{{#if user.isLoggedIn}}
+		<h2>Logout</h2>
+	{{else}}
+		<h2>Login</h2>
+	{{/if}}
 	<div class="text">
 	<p>
-		{{#if isLoggedIn}}
+		{{#if user.isLoggedIn}}
 			<b>Your Name:</b> {{name}}<b>, Over 18:</b> {{over_18}} <br>
 			<span class="warn">Warning:</span> refreshing the page will log you out. <br>
 		{{else}}
@@ -10,7 +14,7 @@
 			<span class="warn">Warning:</span> you will be temporarily redirected to reddits login page. <br>
 		{{/if}}
 	</p>
-	{{#if isLoggedIn}}
+	{{#if user.isLoggedIn}}
 		<button {{action "logout"}}>logout</button>
 	{{else}}
 		<button {{action "login"}}>login</button>

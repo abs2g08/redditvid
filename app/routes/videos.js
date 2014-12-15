@@ -14,6 +14,8 @@ export default Ember.Route.extend(SVGLoader, Poller, {
 
   setupController: function (controller, model) {
     this._super(controller, model);
+
+    // TO-DO: need to find a better place to start polling from
     if(user.isLoggedIn) {
       this.start();
     }

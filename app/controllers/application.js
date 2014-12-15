@@ -1,6 +1,8 @@
 import Ember from 'ember';
+import user from '../models/user';
 
 export default Ember.ObjectController.extend({
+  user: user,
   actions: {
   	  videos: function() {
   	  	this.send('closeMenu');
