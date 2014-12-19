@@ -20,7 +20,7 @@ export default Ember.Mixin.create(Poller, {
 		} else if(this.get('storage.oauth')) {
 			var tokenObj = JSON.parse(this.get('storage.oauth'));
 			if(tokenObj) {
-				if(((moment().unix() - moment.unix(tokenObj.date).unix())) > this.get('intervalInSeconds')) {
+				if((moment().unix() - moment.unix(tokenObj.date).unix()) > this.get('intervalInSeconds')) {
 					_this.set('storage.oauth', null);
 				} else {
 					user.access_token = tokenObj.token;
