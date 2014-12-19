@@ -2,9 +2,13 @@ import Ember from 'ember';
 import user from '../models/user';
 
 export default Ember.ObjectController.extend({
+
+  //used for OAuth
   queryParams: ["state", "code"],
   state: null,
-  code: null,   
+  code: null,
+  //
+   
   actions: {
   	  videos: function() {
   	  	this.send('closeMenu');
