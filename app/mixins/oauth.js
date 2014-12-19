@@ -6,8 +6,8 @@ import LocalStorage from '../utils/localstorage';
 export default Ember.Mixin.create(Poller, {
 	user: user,
 	storage: new LocalStorage(),
-	//interval: 3300000,
-	interval: 10000,
+	interval: 3300000,
+	//interval: 10000,
 	intervalInSeconds: function() {
 		return (this.get('interval')/1000);
 	}.property('interval'),
