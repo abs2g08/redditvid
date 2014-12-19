@@ -2,8 +2,9 @@ import Ember from 'ember';
 
 export default Ember.Mixin.create({
   pollStarted: false,
-  interval: 3300000,
-  //interval: 10000,
+
+  // will be overwritten by mixin
+  interval: null,
 
   // Schedules the function `f` to be executed every `interval` time.
   schedule: function(f) {

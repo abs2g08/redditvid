@@ -6,20 +6,26 @@ import LocalStorage from '../utils/localstorage';
 export default Ember.Mixin.create(Poller, {
 	user: user,
 	storage: new LocalStorage(),
+	//interval: 3300000,
+	interval: 10000,
+	intervalInSeconds: function() {
+		return (this.get('interval')/1000);
+	}.property('interval'),
 	model: function(params) {
 		var _this = this;
-
 	    if(params.state && params.code && !user.isLoggedIn) {
 	    	return _this.controllerFor('oauth').getAccessToken(params).then(function() {
 	    		_this.set('storage.oauth', JSON.stringify({token: user.access_token, date: moment().unix()}));
 	    	});
 		} else if(this.get('storage.oauth')) {
 			var tokenObj = JSON.parse(this.get('storage.oauth'));
-			if((moment().unix() - moment.unix(tokenObj.date).unix()) > 1000) {
-				_this.set('storage.oauth', null);
-			} else {
-				user.access_token = tokenObj.token;
-				return this.controllerFor('oauth').getUserInfo();
+			if(tokenObj) {
+				if(((moment().unix() - moment.unix(tokenObj.date).unix())) > this.get('intervalInSeconds')) {
+					_this.set('storage.oauth', null);
+				} else {
+					user.access_token = tokenObj.token;
+					return this.controllerFor('oauth').getUserInfo();
+				}
 			}
 		}
 	},
