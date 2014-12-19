@@ -7,7 +7,7 @@
 	<div class="text">
 	<p>
 		{{#if user.isLoggedIn}}
-			<b>Your Name:</b> {{name}}<b>, Over 18:</b> {{over_18}} <br>
+			<b>Your Name:</b> {{user.name}}<b>, Over 18:</b> {{user.over_18}} <br>
 			<span class="warn">Warning:</span> refreshing the page will log you out. <br>
 		{{else}}
 			You are <b>not</b> logged in, please select login to continue. <br>

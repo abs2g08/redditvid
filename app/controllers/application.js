@@ -2,19 +2,21 @@ import Ember from 'ember';
 import user from '../models/user';
 
 export default Ember.ObjectController.extend({
-  user: user,
+  queryParams: ["state", "code"],
+  state: null,
+  code: null,   
   actions: {
   	  videos: function() {
   	  	this.send('closeMenu');
-  	  	this.transitionToRoute('videos');
+  	  	this.transitionToRoute('videos', {queryParams: {state: null, code: null}});
   	  },
   	  about: function() {
   	  	this.send('closeMenu');
-  	  	this.transitionToRoute('about');
+  	  	this.transitionToRoute('about', {queryParams: {state: null, code: null}});
   	  },
   	  login: function() {
   	  	this.send('closeMenu');
-  	  	this.transitionToRoute('login');
+  	  	this.transitionToRoute('login', {queryParams: {state: null, code: null}});
   	  },
 	  closeMenu: function() {
 	  	Ember.$('body').removeClass('open');
