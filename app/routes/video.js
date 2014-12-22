@@ -39,9 +39,11 @@ export default Ember.Route.extend(SVGLoader, {
         reply.created_utc = rawReply.created_utc;
         reply.score = rawReply.score;
 
-        if(!lastReply.replies) {
-          lastReply.replies = [];
-        }
+        // if(!lastReply.replies) {
+        //   lastReply.replies = [];
+        // }
+
+        lastReply.replies = lastReply.replies || [];
 
         lastReply.replies.push(reply);
         return _this.buildReplyTree(rawReply.replies, reply);
@@ -61,11 +63,12 @@ export default Ember.Route.extend(SVGLoader, {
       item.media_embed = video_data.media_embed.content;
       item.title = video_data.title;
 
-      if(options.context) {
-        Ember.$.each(item, function(key, value) {
-          options.context.set(key, value);
-        });
-      }
+      // if(options.context) {
+      //   alert('is this even useful anymore?');
+      //   Ember.$.each(item, function(key, value) {
+      //     options.context.set(key, value);
+      //   });
+      // }
 
       var comment = {};
       return _this.buildReplyTree(rawData[1], comment).then(function() {

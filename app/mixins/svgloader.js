@@ -21,10 +21,10 @@ export default Ember.Mixin.create({
 		if(!this.modelFor(this.loaderOptions.modelName)) {
 			this.loader = new SVGLoader( document.getElementById( 'loader' ), this.loaderOptions );
 			this.loader.show();
-	  	}
+	  }
 	},
 
-  	afterModel: function() {
-    	this.loader.hide();
-  	},
+	afterModel: function() {
+  	this.loader.hide();
+	}
 });

@@ -6,7 +6,7 @@ export default Ember.Route.extend(SVGLoader, {
     this.loaderOptions = { 
       speedIn : 0,
       speedOut : 500,
-      delay : 5000
+      delay : 4000
     };
   },
 
