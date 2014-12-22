@@ -5,7 +5,7 @@ export default Ember.ObjectController.extend({
   dir: 0,
 
   upClass: function() {
-  	return this.get('dir') === 1 ? "selected" : "";
+    return this.get('dir') === 1 ? "selected" : "";
   }.property('dir'),
 
   downClass: function() {
@@ -27,36 +27,36 @@ export default Ember.ObjectController.extend({
 
   postVote: function(direction) {
   	if(this.canVote()) {
-	  var _this = this;
-    
-	  return Ember.$.ajax({
-      	type: "POST",
-	      url: "/oath-reddit/api/vote",
-      	headers: {
-        	"Authorization": "bearer " + user.access_token,
-      	},
-      	dataType: 'json',
-      	data: { 
+  	  var _this = this;
+      
+  	  return Ember.$.ajax({
+        type: "POST",
+        url: "/oath-reddit/api/vote",
+        headers: {
+          "Authorization": "bearer " + user.access_token,
+        },
+        dataType: 'json',
+        data: { 
           dir: direction,
           id: this.get('id') 
         },
-      }).then(function(){
-      	 _this.set('dir', direction);
+      }).then(function() {
+        _this.set('dir', direction);
       }).fail(function(data) {
-         if(data.statusText === "Unauthorized") {
+        if(data.statusText === "Unauthorized") {
           user.isLoggedIn = false;
-            alert('your session has expired'); 
-         } else {
-            alert('error trying to vote');
-         }
+          alert('your session has expired'); 
+        } else {
+          alert('error trying to vote');
+        }
       });
-  	}
+    }
   },
 
   actions: {
-  	voteUp: function() {
-  	  this.postVote(1);
-  	},
+    voteUp: function() {
+      this.postVote(1);
+    },
   	voteDown: function() {
 	    this.postVote(-1);
   	}
