@@ -11,6 +11,7 @@ export default Ember.Mixin.create(Poller, {
   intervalInSeconds: function() {
     return (this.get('interval')/1000);
   }.property('interval'),
+  
   model: function(params) {
     var _this = this;
 		if(params.state && params.code && !user.isLoggedIn) {
@@ -32,9 +33,9 @@ export default Ember.Mixin.create(Poller, {
 
 	afterModel: function(transition) {
 		this._super(transition);
-			if(user.isLoggedIn) {
-	      this.start();
-	    }
+		if(user.isLoggedIn) {
+			this.start();
+		}
 	},
 
 	onPoll: function() {

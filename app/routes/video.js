@@ -39,13 +39,9 @@ export default Ember.Route.extend(SVGLoader, {
         reply.created_utc = rawReply.created_utc;
         reply.score = rawReply.score;
 
-        // if(!lastReply.replies) {
-        //   lastReply.replies = [];
-        // }
-
         lastReply.replies = lastReply.replies || [];
-
         lastReply.replies.push(reply);
+        
         return _this.buildReplyTree(rawReply.replies, reply);
       }));
     }
