@@ -3,6 +3,10 @@ import user from '../models/user';
 import Poller from './poller';
 import LocalStorage from '../utils/localstorage';
 
+/*
+	Similar to: https://github.com/simplabs/ember-simple-auth/blob/master/packages/ember-simple-auth/lib/simple-auth/mixins/application-route-mixin.js
+*/
+
 export default Ember.Mixin.create(Poller, {
   user: user,
   storage: new LocalStorage(),
@@ -39,8 +43,8 @@ export default Ember.Mixin.create(Poller, {
 	},
 
 	onPoll: function() {
-  	// Implicit grant flow tokens are only valid for 1 hour. 
-  	// before this happens, onPoll will trigger prompting use to login again
-  	this.controllerFor('oauth').login();
+  		// Implicit grant flow tokens are only valid for 1 hour. 
+  		// before this happens, onPoll will trigger prompting use to login again
+  		this.controllerFor('oauth').login();
 	}		
 });
