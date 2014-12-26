@@ -28,11 +28,22 @@ test("Video Detail", function() {
 
 					//if we find an iframe, then we can asssume the video has properly loaded
 					ok(find('iframe').length > 0, 'Passed! Video' + String($(this).data('id')) + 'loaded');
+
+					// click('.show-comments');
+					// andThen(function() {
+
+					// 	//there is a chance that a post might no actually have any comments
+					// 	//but unlightly if top 25 video
+					// 	if($('.comment').length > 0) {
+					// 		ok(true, 'Passed! Comments shown');
+					// 	} else {
+					// 		ok(false, 'Failed! No comments');
+					// 	}
+					// });
 				});
 			} else {
 
 				var _this = this;
-
 				//if there is a hybperlink, assume its to valid external content and pass test
 				if($(this).find('.vid_link .ember-view a')) {					
 					ok(true, 'Passed! Video' + String($(this).data('id')));

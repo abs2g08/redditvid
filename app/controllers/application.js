@@ -3,7 +3,7 @@ import Ember from 'ember';
 
 export default Ember.ObjectController.extend({
 
-  //used for OAuth
+  //used for OAuth, NOTE: not very nice, would like to make Oauth more pluggable
   queryParams: ["state", "code"],
   state: null,
   code: null,
