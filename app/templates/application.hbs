@@ -22,8 +22,8 @@
   {{/if}}
   <li><a href="#" {{action 'about'}}> About</a></li>  
   <li>
-    <div class="speech">
-      <span class="text">Speach Routing</span> <span class="record off"></span>
+    <div {{bind-attr class=":speech on"}} {{action 'speech'}}>
+      <span class="text">Speech Routing</span> <span class="record"></span>
     </div>
   </li>
   </ul>

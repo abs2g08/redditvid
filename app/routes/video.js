@@ -42,7 +42,7 @@ export default Ember.Route.extend(SVGLoader, {
         lastReply.replies = lastReply.replies || [];
         lastReply.replies.push(reply);
         
-        //NOTE: setTimeout is used to avoid a potential stack overflow.
+        //NOTE: setTimeout is used to avoid potential stack overflow.
         return setTimeout((function() { return _this.buildReplyTree(rawReply.replies, reply); }), 0);
       }));
     }

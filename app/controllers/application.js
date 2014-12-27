@@ -9,6 +9,8 @@ export default Ember.ObjectController.extend({
   code: null,
   //
    
+  on: true,
+   
   actions: {
     videos: function() {
       this.send('closeMenu');
@@ -33,6 +35,6 @@ export default Ember.ObjectController.extend({
     	Ember.$('.app-bar').toggleClass('open');
     	Ember.$('.navdrawer-container').toggleClass('open');
     	Ember.$('.navdrawer-container').addClass('opened');
-    },
+    }
   }
 });
