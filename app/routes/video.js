@@ -42,7 +42,8 @@ export default Ember.Route.extend(SVGLoader, {
         lastReply.replies = lastReply.replies || [];
         lastReply.replies.push(reply);
         
-        return _this.buildReplyTree(rawReply.replies, reply);
+        //NOTE: setTimeout is used to avoid a potential stack overflow.
+        return setTimeout((function() { return _this.buildReplyTree(rawReply.replies, reply); }), 0);
       }));
     }
   },
@@ -58,13 +59,6 @@ export default Ember.Route.extend(SVGLoader, {
       item.id = options.id;
       item.media_embed = video_data.media_embed.content;
       item.title = video_data.title;
-
-      // if(options.context) {
-      //   alert('is this even useful anymore?');
-      //   Ember.$.each(item, function(key, value) {
-      //     options.context.set(key, value);
-      //   });
-      // }
 
       var comment = {};
       return _this.buildReplyTree(rawData[1], comment).then(function() {
