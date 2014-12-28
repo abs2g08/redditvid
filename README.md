@@ -13,11 +13,11 @@ Currently it's possible to:
 
 ## Screen Shots
 
-Screen Shot 1
+Screenshot 1
 
 ![Front Page Image](http://i.imgur.com/ASckNar.png =197x350 "Front Page")
 
-Screen Shot 2
+Screenshot 2
 
 ![Front Page Menu Open](http://i.imgur.com/5ruUsZp.png =197x350 "Front Page - Menu Open")
 
