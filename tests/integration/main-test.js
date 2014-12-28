@@ -29,6 +29,10 @@ test("Video Detail", function() {
 					//if we find an iframe, then we can asssume the video has properly loaded
 					ok(find('iframe').length > 0, 'Passed! Video' + String($(this).data('id')) + 'loaded');
 
+
+					//NOTE: following code doesn't work because ember turns of async on testing
+					//      see: http://discuss.emberjs.com/t/guide-asynchronous-side-effects-in-testing/2905
+
 					// click('.show-comments');
 					// andThen(function() {
 

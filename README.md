@@ -1,6 +1,6 @@
 # Redditvid
 
-Redditvid is a lighweight client that regurgitates [www.reddit.com/r/videos](www.reddit.com/r/videos) into a responsive form. It's made using Ember CLI and hosted on Node.js. 
+Redditvid is a lightweight client that regurgitates [www.reddit.com/r/videos](www.reddit.com/r/videos) into a responsive form. It's made using Ember CLI and hosted on Node.js. 
 I created it to better understand Ember, Ouath and SVG transitions.
 Currently it's possible to:			
 
