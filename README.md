@@ -7,6 +7,7 @@ Currently it's possible to:
 * List top 25 trending vidoes
 * Login using oauth
 * Upvote or downvote a video
+* Speech Routing (when enabled say 'transition' followed by the name of the route e.g. 'transition videos')
 * View videos
 * View top level comments
 * Leave a comment
