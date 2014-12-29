@@ -12,7 +12,7 @@ Currently it's possible to:
 * View top level comments
 * Leave a comment
 
-## Screen Shots
+## Screenshots
 
 Screenshot 1
 
