@@ -37,7 +37,7 @@ export default Ember.Mixin.create(Poller, {
 
 	afterModel: function(transition) {
 		this._super(transition);
-		if(user.isLoggedIn) this.start();
+		if(user.isLoggedIn) { this.start(); }
 	},
 
 	onPoll: function() {
