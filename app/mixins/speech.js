@@ -6,9 +6,9 @@ export default Ember.Mixin.create({
 	_speechRouterOn: true,
 	toggleSpeechRouter: function() {
 		if(this._speechRouterOn) {
-        	this.speechRouter.stop();
+			this.speechRouter.stop();
 		} else {
-        	this.speechRouter.start();			
+			this.speechRouter.start();			
 		}
 		this._speechRouterOn = !this._speechRouterOn;
 		return this._speechRouterOn;
@@ -25,7 +25,7 @@ export default Ember.Mixin.create({
 		});
 
 		this.speechRouter = new SpeechRouter(routes);
-        this.speechRouter.start();
-        this._super();
+		this.speechRouter.start();
+		this._super();
 	}
 });

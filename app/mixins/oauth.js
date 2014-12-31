@@ -21,7 +21,7 @@ export default Ember.Mixin.create(Poller, {
 		if(params.state && params.code && !user.isLoggedIn) {
 			return _this.controllerFor('oauth').getAccessToken(params).then(function() {
 				_this.set('storage.oauth', JSON.stringify({token: user.access_token, date: moment().unix()}));
-	    });
+	  	});
 		} else if(this.get('storage.oauth')) {
 			var tokenObj = JSON.parse(this.get('storage.oauth'));
 			if(tokenObj) {
@@ -41,8 +41,8 @@ export default Ember.Mixin.create(Poller, {
 	},
 
 	onPoll: function() {
-  		// Implicit grant flow tokens are only valid for 1 hour. 
-  		// before this happens, onPoll will trigger prompting use to login again
-  		this.controllerFor('oauth').login();
+		// Implicit grant flow tokens are only valid for 1 hour. 
+		// before this happens, onPoll will trigger prompting use to login again
+		this.controllerFor('oauth').login();
 	}		
 });
