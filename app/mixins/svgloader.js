@@ -25,6 +25,6 @@ export default Ember.Mixin.create({
 	},
 
 	afterModel: function() {
-  	this.loader.hide();
+		this.loader.hide();
 	}
 });
