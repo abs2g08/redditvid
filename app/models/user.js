@@ -15,5 +15,6 @@ export default Ember.Object.create({
 		this.gold_creddits = null;
 		this.over_18 = null;
 		this.comment_karma = null;
+		
 	}
 });
