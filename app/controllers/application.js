@@ -11,15 +11,15 @@ export default Ember.ObjectController.extend({
   on: true,
 
   actions: {
-    videos: function() {
+    showVideos: function() {
       this.send('closeMenu');
       this.transitionToRoute('videos', {queryParams: {state: null, code: null}});
     },
-    about: function() {
+    showAbout: function() {
       this.send('closeMenu');
       this.transitionToRoute('about', {queryParams: {state: null, code: null}});
     },
-    login: function() {
+    showLogin: function() {
       this.send('closeMenu');
       this.transitionToRoute('login', {queryParams: {state: null, code: null}});
     },

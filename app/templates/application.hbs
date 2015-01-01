@@ -14,15 +14,15 @@
   <ul>
 {{!-- 	<li>{{#link-to 'index'}}  Index {{/link-to}}</li>
 	<li>{{#link-to 'about'}}  About {{/link-to}}</li> --}}
-  <li><a href="#" {{action 'videos'}}> Videos</a></li>
+  <li><a href="#" {{action 'showVideos'}}> Videos</a></li>
   {{#if user.isLoggedIn}}
-    <li><a href="#" {{action 'login'}}> Logout</a></li>
+    <li><a href="#" {{action 'showLogin'}}> Logout</a></li>
   {{else}}
-    <li><a href="#" {{action 'login'}}> Login</a></li>
+    <li><a href="#" {{action 'showLogin'}}> Login</a></li>
   {{/if}}
-  <li><a href="#" {{action 'about'}}> About</a></li>  
+  <li><a href="#" {{action 'showAbout'}}> About</a></li>  
   <li>
-    <div {{bind-attr class=":speech on"}} {{action 'speech'}}>
+    <div {{bind-attr class=":speech on"}} {{action 'toggleSpeech'}}>
       <span class="text">Speech Routing</span> <span class="record"></span>
     </div>
   </li>

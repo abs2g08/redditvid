@@ -4,7 +4,7 @@ import Speech from '../mixins/speech';
 
 export default Ember.Route.extend(OAuth, Speech, {
 	actions: {
-		speech: function() {
+		toggleSpeech: function() {
 			this.controller.set('on', this.toggleSpeechRouter());
 	  }
 	}
