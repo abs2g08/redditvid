@@ -27,12 +27,16 @@ Screenshot 2
 You will need the following things properly installed on your computer.
 
 * [Git](http://git-scm.com/)
-* [Node.js](http://nodejs.org/) (with NPM) and [Bower](http://bower.io/)
+* [Node.js@0.12.9](http://nodejs.org/)
+* [n](https://www.npmjs.com/package/n)
+* [Bower](http://bower.io/)
+* [Ember.js](http://ember-cli.com/)
 
 ## Installation
 
 * `git clone https://github.com/abs2g08/redditvid.git`
 * `cd redditvid`
+*  n 0.12.9
 * `npm install`
 * `bower install`
 
