@@ -36,7 +36,7 @@ You will need the following things properly installed on your computer.
 
 * `git clone https://github.com/abs2g08/redditvid.git`
 * `cd redditvid`
-*  n 0.12.9
+* `n 0.12.9`
 * `npm install`
 * `bower install`
 
